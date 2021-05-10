@@ -1,0 +1,46 @@
+{
+	"name": "Top200SongsRaw",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LSADLS",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "Top200Songsraw.csv",
+				"folderPath": "t01/DSP_G01_02/Raw",
+				"fileSystem": "storage"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "Position",
+				"type": "String"
+			},
+			{
+				"name": "Track Name",
+				"type": "String"
+			},
+			{
+				"name": "Artist",
+				"type": "String"
+			},
+			{
+				"name": "Streams",
+				"type": "String"
+			},
+			{
+				"name": "Date",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

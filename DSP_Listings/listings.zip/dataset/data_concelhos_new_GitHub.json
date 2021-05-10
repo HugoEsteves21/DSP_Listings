@@ -1,0 +1,142 @@
+{
+	"name": "data_concelhos_new_GitHub",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "DSP_GR03_Ingest_data_concelhos_new_from_GitHubURL",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "DSP_G2_12"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "HttpServerLocation"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "data",
+				"type": "String"
+			},
+			{
+				"name": "concelho",
+				"type": "String"
+			},
+			{
+				"name": "confirmados_14",
+				"type": "String"
+			},
+			{
+				"name": "confirmados_1",
+				"type": "String"
+			},
+			{
+				"name": "incidencia",
+				"type": "String"
+			},
+			{
+				"name": "incidencia_categoria",
+				"type": "String"
+			},
+			{
+				"name": "incidencia_risco",
+				"type": "String"
+			},
+			{
+				"name": "tendencia_incidencia",
+				"type": "String"
+			},
+			{
+				"name": "tendencia_categoria",
+				"type": "String"
+			},
+			{
+				"name": "tendencia_desc",
+				"type": "String"
+			},
+			{
+				"name": "casos_14dias",
+				"type": "String"
+			},
+			{
+				"name": "ars",
+				"type": "String"
+			},
+			{
+				"name": "distrito",
+				"type": "String"
+			},
+			{
+				"name": "dicofre",
+				"type": "String"
+			},
+			{
+				"name": "area",
+				"type": "String"
+			},
+			{
+				"name": "population",
+				"type": "String"
+			},
+			{
+				"name": "population_65_69",
+				"type": "String"
+			},
+			{
+				"name": "population_70_74",
+				"type": "String"
+			},
+			{
+				"name": "population_75_79",
+				"type": "String"
+			},
+			{
+				"name": "population_80_84",
+				"type": "String"
+			},
+			{
+				"name": "population_85_mais",
+				"type": "String"
+			},
+			{
+				"name": "population_80_mais",
+				"type": "String"
+			},
+			{
+				"name": "population_75_mais",
+				"type": "String"
+			},
+			{
+				"name": "population_70_mais",
+				"type": "String"
+			},
+			{
+				"name": "population_65_mais",
+				"type": "String"
+			},
+			{
+				"name": "densidade_populacional",
+				"type": "String"
+			},
+			{
+				"name": "densidade_1",
+				"type": "String"
+			},
+			{
+				"name": "densidade_2",
+				"type": "String"
+			},
+			{
+				"name": "densidade_3",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

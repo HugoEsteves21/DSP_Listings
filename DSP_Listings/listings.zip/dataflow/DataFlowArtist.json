@@ -1,0 +1,79 @@
+{
+	"name": "DataFlowArtist",
+	"properties": {
+		"folder": {
+			"name": "DSP_G01_02"
+		},
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "ArtistRaw",
+						"type": "DatasetReference"
+					},
+					"name": "ArtistRAW"
+				},
+				{
+					"dataset": {
+						"referenceName": "AzureSqlTable16",
+						"type": "DatasetReference"
+					},
+					"name": "ArtistDW"
+				},
+				{
+					"dataset": {
+						"referenceName": "AzureSqlTable16",
+						"type": "DatasetReference"
+					},
+					"name": "ArtistDWsecondvalidation"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "ArtistProcessed",
+						"type": "DatasetReference"
+					},
+					"name": "SinktoADLSProcessed"
+				}
+			],
+			"transformations": [
+				{
+					"name": "Filteractiverows"
+				},
+				{
+					"name": "Filteractiverowssecondvalidation"
+				},
+				{
+					"name": "RenameColumnstomatchDW"
+				},
+				{
+					"name": "ComparedatainRAWtoDW"
+				},
+				{
+					"name": "UpdateSCD"
+				},
+				{
+					"name": "ComparedatainDWtoRaw"
+				},
+				{
+					"name": "ComparadatainDWtoRawsecondvalidation"
+				},
+				{
+					"name": "ComparadatainDWsecondvalidation"
+				},
+				{
+					"name": "Inactiverows"
+				},
+				{
+					"name": "Unionwithinactiverows"
+				},
+				{
+					"name": "Unionactivewithinactiverows"
+				}
+			],
+			"script": "source(output(\n\t\tid as string,\n\t\tfollowers as integer,\n\t\tgenres as string,\n\t\tname as string,\n\t\tpopularity as integer\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> ArtistRAW\nsource(output(\n\t\tArtistKey as string,\n\t\tArtistName as string,\n\t\tArtistFollowers as integer,\n\t\tArtistGenres as string,\n\t\tArtistPopularity as integer,\n\t\tStartDate as timestamp,\n\t\tEndDate as timestamp,\n\t\tCurrentRowIndicator as integer\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tisolationLevel: 'READ_UNCOMMITTED',\n\tformat: 'table') ~> ArtistDW\nsource(output(\n\t\tArtistKey as string,\n\t\tArtistName as string,\n\t\tArtistFollowers as integer,\n\t\tArtistGenres as string,\n\t\tArtistPopularity as integer,\n\t\tStartDate as timestamp,\n\t\tEndDate as timestamp,\n\t\tCurrentRowIndicator as integer\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tisolationLevel: 'READ_UNCOMMITTED',\n\tformat: 'table') ~> ArtistDWsecondvalidation\nArtistDW filter(toInteger(byName('CurrentRowIndicator')) ==1) ~> Filteractiverows\nArtistDWsecondvalidation filter(toInteger(byName('CurrentRowIndicator')) ==1) ~> Filteractiverowssecondvalidation\nArtistRAW select(mapColumn(\n\t\tArtistKey = id,\n\t\tArtistFollowers = followers,\n\t\tArtistGenres = genres,\n\t\tArtistName = name,\n\t\tArtistPopularity = popularity\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> RenameColumnstomatchDW\nRenameColumnstomatchDW, Filteractiverows exists(RenameColumnstomatchDW@ArtistKey == ArtistDW@ArtistKey\n\t&& RenameColumnstomatchDW@ArtistFollowers == ArtistDW@ArtistFollowers\n\t&& RenameColumnstomatchDW@ArtistPopularity == ArtistDW@ArtistPopularity,\n\tnegate:true,\n\tbroadcast: 'auto')~> ComparedatainRAWtoDW\nComparedatainRAWtoDW derive(StartDate = currentUTC(),\n\t\tEndDate = toTimestamp(toString(null())),\n\t\tCurrentRowIndicator = 1) ~> UpdateSCD\nFilteractiverows, RenameColumnstomatchDW exists(ArtistDW@ArtistKey == RenameColumnstomatchDW@ArtistKey\n\t&& ArtistDW@ArtistFollowers == RenameColumnstomatchDW@ArtistFollowers\n\t&& ArtistDW@ArtistPopularity == RenameColumnstomatchDW@ArtistPopularity,\n\tnegate:false,\n\tbroadcast: 'auto')~> ComparedatainDWtoRaw\nComparadatainDWsecondvalidation, RenameColumnstomatchDW exists(ArtistDWsecondvalidation@ArtistKey == RenameColumnstomatchDW@ArtistKey\n\t&& ArtistDWsecondvalidation@ArtistFollowers == RenameColumnstomatchDW@ArtistFollowers\n\t&& ArtistDWsecondvalidation@ArtistPopularity == RenameColumnstomatchDW@ArtistPopularity,\n\tnegate:true,\n\tbroadcast: 'auto')~> ComparadatainDWtoRawsecondvalidation\nFilteractiverowssecondvalidation, RenameColumnstomatchDW exists(ArtistDWsecondvalidation@ArtistKey == RenameColumnstomatchDW@ArtistKey,\n\tnegate:false,\n\tbroadcast: 'auto')~> ComparadatainDWsecondvalidation\nComparadatainDWtoRawsecondvalidation derive(EndDate = currentUTC(),\n\t\tCurrentRowIndicator = 0) ~> Inactiverows\nComparedatainDWtoRaw, Inactiverows union(byName: true)~> Unionwithinactiverows\nUpdateSCD, Unionwithinactiverows union(byName: true)~> Unionactivewithinactiverows\nUnionactivewithinactiverows sink(input(\n\t\tArtistKey as string,\n\t\tArtistFollowers as string,\n\t\tArtistGenres as string,\n\t\tArtistName as string,\n\t\tArtistPopularity as string,\n\t\tStartDate as string,\n\t\tEndDate as string,\n\t\tCurrentRowIndicator as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tpartitionFileNames:['ArtistsProcessed.csv'],\n\tpartitionBy('hash', 1),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> SinktoADLSProcessed"
+		}
+	}
+}

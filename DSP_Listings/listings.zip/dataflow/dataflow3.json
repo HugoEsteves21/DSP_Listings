@@ -1,0 +1,110 @@
+{
+	"name": "dataflow3",
+	"properties": {
+		"folder": {
+			"name": "DSP_G01_02"
+		},
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "TesteTop200",
+						"type": "DatasetReference"
+					},
+					"name": "Top200Raw"
+				},
+				{
+					"dataset": {
+						"referenceName": "DateDimension",
+						"type": "DatasetReference"
+					},
+					"name": "DateDimension"
+				},
+				{
+					"dataset": {
+						"referenceName": "TesteTop200",
+						"type": "DatasetReference"
+					},
+					"name": "Top200Raw2"
+				},
+				{
+					"dataset": {
+						"referenceName": "Nacionalidade",
+						"type": "DatasetReference"
+					},
+					"name": "ArtistNacionalidade"
+				},
+				{
+					"dataset": {
+						"referenceName": "CountryDimension",
+						"type": "DatasetReference"
+					},
+					"name": "CountryDimension"
+				},
+				{
+					"dataset": {
+						"referenceName": "Keys",
+						"type": "DatasetReference"
+					},
+					"name": "ArtistDimension"
+				},
+				{
+					"dataset": {
+						"referenceName": "DWArtistPopularity",
+						"type": "DatasetReference"
+					},
+					"name": "ArtistiPopularity"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "DelimitedText83",
+						"type": "DatasetReference"
+					},
+					"name": "sink1"
+				}
+			],
+			"transformations": [
+				{
+					"name": "ObtainCountryKey"
+				},
+				{
+					"name": "SelectCountryKey"
+				},
+				{
+					"name": "ObtainArtistKey"
+				},
+				{
+					"name": "ObtainDateKey"
+				},
+				{
+					"name": "Select1"
+				},
+				{
+					"name": "CountryKey"
+				},
+				{
+					"name": "Select2"
+				},
+				{
+					"name": "Aggregate1"
+				},
+				{
+					"name": "Join1"
+				},
+				{
+					"name": "Select3"
+				},
+				{
+					"name": "Aggregate2"
+				},
+				{
+					"name": "Join2"
+				}
+			],
+			"script": "source(output(\n\t\tPosition as string,\n\t\t{Track Name} as string,\n\t\tArtist as string,\n\t\tStreams as integer,\n\t\tDate as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> Top200Raw\nsource(output(\n\t\t{Date Key} as string,\n\t\t{Week start date} as string,\n\t\t{Week end date} as string,\n\t\t{Week number} as string,\n\t\tMonth as string,\n\t\tYear as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tisolationLevel: 'READ_UNCOMMITTED',\n\tformat: 'table') ~> DateDimension\nsource(output(\n\t\tPosition as string,\n\t\t{Track Name} as string,\n\t\tArtist as string,\n\t\tStreams as string,\n\t\tDate as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> Top200Raw2\nsource(output(\n\t\tArtist as string,\n\t\tCountry as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> ArtistNacionalidade\nsource(output(\n\t\tCountryKey as integer,\n\t\tCountryName as string,\n\t\tCountryAbbreviation as string,\n\t\tCountryPopulation as string,\n\t\tStartDate as string,\n\t\tEndDate as string,\n\t\tCurrentRowIndicator as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tisolationLevel: 'READ_UNCOMMITTED',\n\tformat: 'table') ~> CountryDimension\nsource(output(\n\t\t{Track Name} as string,\n\t\tArtist as string,\n\t\tTrackKey as string,\n\t\tArtistKey as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> ArtistDimension\nsource(output(\n\t\tStreamedDateKey as string,\n\t\tSongKey as string,\n\t\tArtistKey as string,\n\t\tCountryKey as string,\n\t\tArtistStreams as string,\n\t\tArtistMusics as string,\n\t\tSongrankingposition as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tisolationLevel: 'READ_UNCOMMITTED',\n\tformat: 'table') ~> ArtistiPopularity\nArtistNacionalidade, CountryDimension join(Country == CountryAbbreviation,\n\tjoinType:'inner',\n\tbroadcast: 'auto')~> ObtainCountryKey\nObtainCountryKey select(mapColumn(\n\t\tArtist,\n\t\tCountryKey\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> SelectCountryKey\nTop200Raw, ArtistDimension join(Top200Raw@Artist == ArtistDimension@Artist,\n\tjoinType:'left',\n\tbroadcast: 'auto')~> ObtainArtistKey\nObtainArtistKey, DateDimension join(Date == {Week start date},\n\tjoinType:'left',\n\tbroadcast: 'auto')~> ObtainDateKey\nObtainDateKey select(mapColumn(\n\t\tArtist = Top200Raw@Artist,\n\t\tStreams,\n\t\tArtistKey,\n\t\t{Date Key}\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> Select1\nSelect1, SelectCountryKey join(Select1@Artist == SelectCountryKey@Artist,\n\tjoinType:'left',\n\tbroadcast: 'auto')~> CountryKey\nCountryKey select(mapColumn(\n\t\t{Date Key},\n\t\tCountryKey,\n\t\tArtistKey,\n\t\tStreams\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> Select2\nSelect2 aggregate(groupBy(ArtistKey,\n\t\t{Date Key},\n\t\tCountryKey),\n\tStreams = sum(Streams)) ~> Aggregate1\nTop200Raw2, ObtainDateKey join(Top200Raw2@Artist == ArtistDimension@Artist,\n\tjoinType:'inner',\n\tbroadcast: 'auto')~> Join1\nJoin1 select(mapColumn(\n\t\t{Track Name} = Top200Raw2@{Track Name},\n\t\tArtistKey,\n\t\t{Date Key}\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> Select3\nSelect3 aggregate(groupBy(ArtistKey,\n\t\t{Date Key}),\n\tSongsNumber = countDistinct({Track Name})) ~> Aggregate2\nAggregate1, Aggregate2 join(Aggregate1@ArtistKey == Aggregate2@ArtistKey,\n\tjoinType:'left',\n\tbroadcast: 'auto')~> Join2\nArtistiPopularity sink(input(\n\t\tColumn_1 as string,\n\t\tColumn_2 as string,\n\t\tColumn_3 as string,\n\t\tColumn_4 as string,\n\t\tColumn_5 as string,\n\t\tColumn_6 as string,\n\t\tColumn_7 as string,\n\t\tColumn_8 as string,\n\t\tColumn_9 as string,\n\t\tColumn_10 as string,\n\t\tColumn_11 as string,\n\t\tColumn_12 as string,\n\t\tColumn_13 as string,\n\t\tColumn_14 as string,\n\t\tColumn_15 as string,\n\t\tColumn_16 as string,\n\t\tColumn_17 as string,\n\t\tColumn_18 as string,\n\t\tColumn_19 as string,\n\t\tColumn_20 as string,\n\t\tColumn_21 as string,\n\t\tColumn_22 as string,\n\t\tColumn_23 as string,\n\t\tColumn_24 as string,\n\t\tColumn_25 as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tpartitionFileNames:['teste'],\n\tpartitionBy('hash', 1),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> sink1"
+		}
+	}
+}

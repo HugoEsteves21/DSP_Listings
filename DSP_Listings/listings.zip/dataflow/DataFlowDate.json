@@ -1,0 +1,31 @@
+{
+	"name": "DataFlowDate",
+	"properties": {
+		"folder": {
+			"name": "DSP_G01_02"
+		},
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "DateDimensionADLS",
+						"type": "DatasetReference"
+					},
+					"name": "DateRaw"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "G01_02DateDimensionProcessed",
+						"type": "DatasetReference"
+					},
+					"name": "SinkDateDimension"
+				}
+			],
+			"transformations": [],
+			"script": "source(output(\n\t\t{Date Key} as string,\n\t\t{Week start date} as string,\n\t\t{Week end date} as string,\n\t\t{Week number} as string,\n\t\tMonth as string,\n\t\tYear as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> DateRaw\nDateRaw sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tpartitionFileNames:['DateDimensionProcessed.csv'],\n\ttruncate: true,\n\tpartitionBy('hash', 1),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> SinkDateDimension"
+		}
+	}
+}

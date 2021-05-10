@@ -1,0 +1,58 @@
+{
+	"name": "DelimitedText76",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LSADLS",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "ArtistsProcessed.csv",
+				"folderPath": "t01/DSP_G01_02/Processed",
+				"fileSystem": "storage"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "ArtistKey",
+				"type": "String"
+			},
+			{
+				"name": "ArtistFollowers",
+				"type": "String"
+			},
+			{
+				"name": "ArtistGenres",
+				"type": "String"
+			},
+			{
+				"name": "ArtistName",
+				"type": "String"
+			},
+			{
+				"name": "ArtistPopularity",
+				"type": "String"
+			},
+			{
+				"name": "StartDate",
+				"type": "String"
+			},
+			{
+				"name": "EndDate",
+				"type": "String"
+			},
+			{
+				"name": "CurrentRowIndicator",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

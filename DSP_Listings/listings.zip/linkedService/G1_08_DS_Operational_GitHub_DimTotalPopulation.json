@@ -1,0 +1,13 @@
+{
+	"name": "G1_08_DS_Operational_GitHub_DimTotalPopulation",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "HttpServer",
+		"typeProperties": {
+			"url": "https://raw.githubusercontent.com/rguerreiro87/dsp/main/TotalPopulation.csv",
+			"enableServerCertificateValidation": true,
+			"authenticationType": "Anonymous"
+		}
+	}
+}

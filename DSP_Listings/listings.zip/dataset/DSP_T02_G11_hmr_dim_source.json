@@ -1,0 +1,23 @@
+{
+	"name": "DSP_T02_G11_hmr_dim_source",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "DSP_LS_T2G11_SOURCE",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Excel",
+		"typeProperties": {
+			"sheetName": "dim_hmr",
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "dim_hmr.xlsx",
+				"folderPath": "t02/DSP_T02_G11/SOURCE",
+				"container": "storage"
+			},
+			"firstRowAsHeader": true
+		},
+		"schema": []
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

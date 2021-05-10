@@ -1,0 +1,52 @@
+{
+	"name": "DSP_T02_G11_geogr_hiearq_source",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "DSP_LS_T2G11_SOURCE",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Excel",
+		"typeProperties": {
+			"sheetName": "geogr_hiearq",
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "geogr_hiearq.xlsx",
+				"folderPath": "t02/DSP_T02_G11/SOURCE",
+				"container": "storage"
+			},
+			"firstRowAsHeader": true
+		},
+		"schema": [
+			{
+				"name": "hmr_id",
+				"type": "String"
+			},
+			{
+				"name": "hmr",
+				"type": "String"
+			},
+			{
+				"name": "zona",
+				"type": "String"
+			},
+			{
+				"name": "cidade",
+				"type": "String"
+			},
+			{
+				"name": "localidade",
+				"type": "String"
+			},
+			{
+				"name": "latitude",
+				"type": "String"
+			},
+			{
+				"name": "longitude",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

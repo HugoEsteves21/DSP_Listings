@@ -1,0 +1,349 @@
+{
+	"name": "DSP_G2_12_ingest_data_from_RAW_to_PROCESSED",
+	"properties": {
+		"description": "Dataflow process to prepare data and transfer to processed folder",
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "contratos_COVID_022021_032021_RAW",
+						"type": "DatasetReference"
+					},
+					"name": "ContratosFevMar2021RAW"
+				},
+				{
+					"dataset": {
+						"referenceName": "contratos_COVID_032020_062020_RAW",
+						"type": "DatasetReference"
+					},
+					"name": "ContratosMarJun2020RAW"
+				},
+				{
+					"dataset": {
+						"referenceName": "contratos_COVID_072020_012021_Raw",
+						"type": "DatasetReference"
+					},
+					"name": "ContratosJulyJan2021RAW"
+				},
+				{
+					"dataset": {
+						"referenceName": "contratos_PANDEMIA_RAW",
+						"type": "DatasetReference"
+					},
+					"name": "ContratosPandemiaRAW"
+				},
+				{
+					"dataset": {
+						"referenceName": "data_RAW",
+						"type": "DatasetReference"
+					},
+					"name": "InfetadosCOVIDdiarioRAW"
+				},
+				{
+					"dataset": {
+						"referenceName": "data_RAW",
+						"type": "DatasetReference"
+					},
+					"name": "DateTABLE"
+				},
+				{
+					"dataset": {
+						"referenceName": "distritos_RAW",
+						"type": "DatasetReference"
+					},
+					"name": "DistritosRAW"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "Covid_Contratos_PROCESSED",
+						"type": "DatasetReference"
+					},
+					"name": "COVIDContractsPROCESSED"
+				},
+				{
+					"dataset": {
+						"referenceName": "InfetadosCOVIDdiarioPROCESSED",
+						"type": "DatasetReference"
+					},
+					"name": "InfetadosCOVIDdiarioPROCESSED"
+				},
+				{
+					"dataset": {
+						"referenceName": "DatePROCESSED",
+						"type": "DatasetReference"
+					},
+					"name": "DateTABLEPROCESSED"
+				},
+				{
+					"dataset": {
+						"referenceName": "EntidadeAdjudicantePROCESSED",
+						"type": "DatasetReference"
+					},
+					"name": "EntidadeAdjudicantePROCESSED"
+				},
+				{
+					"dataset": {
+						"referenceName": "EntidadeAdjudicatariaPROCESSED",
+						"type": "DatasetReference"
+					},
+					"name": "EntidadeAdjudicatariaPROCESSED"
+				},
+				{
+					"dataset": {
+						"referenceName": "TipodeContratoPROCESSED",
+						"type": "DatasetReference"
+					},
+					"name": "TipodeContratoPROCESSED"
+				},
+				{
+					"dataset": {
+						"referenceName": "DistritosPROCESSED",
+						"type": "DatasetReference"
+					},
+					"name": "DistritosPROCESSED"
+				},
+				{
+					"dataset": {
+						"referenceName": "ContratosCOVID_PROCESSED",
+						"type": "DatasetReference"
+					},
+					"name": "ContratosCOVIDPROCESSED"
+				}
+			],
+			"transformations": [
+				{
+					"name": "AllCOVIDContractsRAW"
+				},
+				{
+					"name": "InfetadosCOVIDdiarioSELECTED"
+				},
+				{
+					"name": "DateTABLESELECTED"
+				},
+				{
+					"name": "DataTABLEwithmoreCOLUMNS"
+				},
+				{
+					"name": "COVIDContratosSELECTED"
+				},
+				{
+					"name": "COVIDContratosREMOVEDUPLICATEROWS"
+				},
+				{
+					"name": "COVIDcontratosREMOVEBLANKVALUES"
+				},
+				{
+					"name": "COVIDcontratosADDCOLUMNS"
+				},
+				{
+					"name": "COVIDcontratosSELECTED2"
+				},
+				{
+					"name": "COVIDcontratoswithSurrogateKey"
+				},
+				{
+					"name": "EntidadesTabela"
+				},
+				{
+					"name": "EntidadeAdjudicanteSELECTED"
+				},
+				{
+					"name": "EntidadeAdjudicanteREMOVEDUPLICATEROWS"
+				},
+				{
+					"name": "EntidadeAdjudicantewithKEY"
+				},
+				{
+					"name": "EntidadeAdjudicatariaSELECTED"
+				},
+				{
+					"name": "EntidadeAdjudicatariaREMOVEDUPLICATEROWS"
+				},
+				{
+					"name": "EntidadeAdjudicatariawithKEY"
+				},
+				{
+					"name": "TipodeContratosSELECTED"
+				},
+				{
+					"name": "TipodeContratosREMOVEDUPLICATEROWS"
+				},
+				{
+					"name": "TipodeContratoswithKEY"
+				},
+				{
+					"name": "DistritoswithKEY"
+				},
+				{
+					"name": "ContratosSELECTED"
+				},
+				{
+					"name": "Select1"
+				},
+				{
+					"name": "JoinTipodeContratos"
+				},
+				{
+					"name": "Select2"
+				},
+				{
+					"name": "JoinDatatable"
+				},
+				{
+					"name": "Select3"
+				},
+				{
+					"name": "REMOVEROWSwithNULLVALUES"
+				},
+				{
+					"name": "JoinwithEntidadeAdjudicanteTable"
+				},
+				{
+					"name": "Select4"
+				},
+				{
+					"name": "JoinwithEntidadeAdjudicatariaTable"
+				},
+				{
+					"name": "Select5"
+				},
+				{
+					"name": "Select6"
+				},
+				{
+					"name": "Aggregate1"
+				},
+				{
+					"name": "DerivedColumn1"
+				},
+				{
+					"name": "ChangeEVORArow"
+				},
+				{
+					"name": "ChangeLISBOArow"
+				},
+				{
+					"name": "ChangeMADEIRArow"
+				},
+				{
+					"name": "ChangePORTOrow"
+				},
+				{
+					"name": "ChangeSETUBALrow"
+				},
+				{
+					"name": "ChangeGUARDArow"
+				},
+				{
+					"name": "ChangeNAOIDENTIFICADOrow"
+				},
+				{
+					"name": "ChangePORTUGALCONTrow"
+				},
+				{
+					"name": "ChangeSANTAREMrow"
+				},
+				{
+					"name": "ChangeLEIRIArow"
+				},
+				{
+					"name": "ChangeACORESrow"
+				},
+				{
+					"name": "Aggregate2"
+				},
+				{
+					"name": "DerivedColumnBRAGANCA"
+				},
+				{
+					"name": "DerivedColumn2"
+				},
+				{
+					"name": "DerivedColumn3"
+				},
+				{
+					"name": "DerivedColumn4"
+				},
+				{
+					"name": "DerivedColumn5"
+				},
+				{
+					"name": "DerivedColumn6"
+				},
+				{
+					"name": "DerivedColumn7"
+				},
+				{
+					"name": "DerivedColumn8"
+				},
+				{
+					"name": "DerivedColumn9"
+				},
+				{
+					"name": "DerivedColumn10"
+				},
+				{
+					"name": "DerivedColumn11"
+				},
+				{
+					"name": "DerivedColumn12"
+				},
+				{
+					"name": "DerivedColumn13"
+				},
+				{
+					"name": "DerivedColumn14"
+				},
+				{
+					"name": "DerivedColumn15"
+				},
+				{
+					"name": "DerivedColumn16"
+				},
+				{
+					"name": "DerivedColumn17"
+				},
+				{
+					"name": "DerivedColumn18"
+				},
+				{
+					"name": "DerivedColumn19"
+				},
+				{
+					"name": "DerivedColumn20"
+				},
+				{
+					"name": "DerivedColumn21"
+				},
+				{
+					"name": "DerivedColumn22"
+				},
+				{
+					"name": "DerivedColumn23"
+				},
+				{
+					"name": "DerivedColumn24"
+				},
+				{
+					"name": "DerivedColumn25"
+				},
+				{
+					"name": "Select7"
+				},
+				{
+					"name": "Aggregate3"
+				},
+				{
+					"name": "Join1"
+				},
+				{
+					"name": "Select8"
+				}
+			],
+			"script": "source(output(\n\t\t{Objeto do Contrato} as string,\n\t\t{Tipo de Procedimento} as string,\n\t\t{Tipo(s) de Contrato} as string,\n\t\tCPVs as string,\n\t\t{Entidade(s) Adjudicante(s)} as string,\n\t\t{Entidade(s) Adjudicatária(s)} as string,\n\t\t{Preço Contratual} as string,\n\t\t{Data de Publicação} as string,\n\t\t{Data de Celebração do Contrato} as date 'dd-MM-yyyy',\n\t\t{Prazo de Execução} as string,\n\t\t{Local de Execução} as string,\n\t\t{Fundamentação} as string,\n\t\t{Causa de Extinção do Contrato} as string,\n\t\t{Data de Fecho do Contrato} as string,\n\t\t{Preço Total Efetivo} as string,\n\t\t{Causas das Alterações ao Prazo} as string,\n\t\t{Causas das Alterações ao Preço} as string,\n\t\tEstado as string,\n\t\t{N.º registo do Acordo Quadro} as string,\n\t\t{Descrição do Acordo Quadro} as string,\n\t\t{Procedimento Centralizado} as string,\n\t\t{Ligação para Peças do Procedimento} as string,\n\t\t{Lista de Fornecedores (cocontratantes)} as string,\n\t\t{Aquisição ao Abrigo de Acordo Quadro de outro Estado-membro da UE} as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\tinferDriftedColumnTypes: true) ~> ContratosFevMar2021RAW\nsource(output(\n\t\t{Objeto do Contrato} as string,\n\t\t{Tipo de Procedimento} as string,\n\t\t{Tipo(s) de Contrato} as string,\n\t\tCPVs as string,\n\t\t{Entidade(s) Adjudicante(s)} as string,\n\t\t{Entidade(s) Adjudicatária(s)} as string,\n\t\t{Preço Contratual} as string,\n\t\t{Data de Publicação} as string,\n\t\t{Data de Celebração do Contrato} as date 'dd-MM-yyyy',\n\t\t{Prazo de Execução} as string,\n\t\t{Local de Execução} as string,\n\t\t{Fundamentação} as string,\n\t\t{Causa de Extinção do Contrato} as string,\n\t\t{Data de Fecho do Contrato} as string,\n\t\t{Preço Total Efetivo} as string,\n\t\t{Causas das Alterações ao Prazo} as string,\n\t\t{Causas das Alterações ao Preço} as string,\n\t\tEstado as string,\n\t\t{N.º registo do Acordo Quadro} as string,\n\t\t{Descrição do Acordo Quadro} as string,\n\t\t{Procedimento Centralizado} as string,\n\t\t{Ligação para Peças do Procedimento} as string,\n\t\t{Lista de Fornecedores (cocontratantes)} as string,\n\t\t{Aquisição ao Abrigo de Acordo Quadro de outro Estado-membro da UE} as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\tinferDriftedColumnTypes: true) ~> ContratosMarJun2020RAW\nsource(output(\n\t\t{Objeto do Contrato} as string,\n\t\t{Tipo de Procedimento} as string,\n\t\t{Tipo(s) de Contrato} as string,\n\t\tCPVs as string,\n\t\t{Entidade(s) Adjudicante(s)} as string,\n\t\t{Entidade(s) Adjudicatária(s)} as string,\n\t\t{Preço Contratual} as string,\n\t\t{Data de Publicação} as string,\n\t\t{Data de Celebração do Contrato} as date 'dd-MM-yyyy',\n\t\t{Prazo de Execução} as string,\n\t\t{Local de Execução} as string,\n\t\t{Fundamentação} as string,\n\t\t{Causa de Extinção do Contrato} as string,\n\t\t{Data de Fecho do Contrato} as string,\n\t\t{Preço Total Efetivo} as string,\n\t\t{Causas das Alterações ao Prazo} as string,\n\t\t{Causas das Alterações ao Preço} as string,\n\t\tEstado as string,\n\t\t{N.º registo do Acordo Quadro} as string,\n\t\t{Descrição do Acordo Quadro} as string,\n\t\t{Procedimento Centralizado} as string,\n\t\t{Ligação para Peças do Procedimento} as string,\n\t\t{Lista de Fornecedores (cocontratantes)} as string,\n\t\t{Aquisição ao Abrigo de Acordo Quadro de outro Estado-membro da UE} as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\tinferDriftedColumnTypes: true) ~> ContratosJulyJan2021RAW\nsource(output(\n\t\t{Objeto do Contrato} as string,\n\t\t{Tipo de Procedimento} as string,\n\t\t{Tipo(s) de Contrato} as string,\n\t\tCPVs as string,\n\t\t{Entidade(s) Adjudicante(s)} as string,\n\t\t{Entidade(s) Adjudicatária(s)} as string,\n\t\t{Preço Contratual} as string,\n\t\t{Data de Publicação} as string,\n\t\t{Data de Celebração do Contrato} as date 'dd-MM-yyyy',\n\t\t{Prazo de Execução} as string,\n\t\t{Local de Execução} as string,\n\t\t{Fundamentação} as string,\n\t\t{Causa de Extinção do Contrato} as string,\n\t\t{Data de Fecho do Contrato} as string,\n\t\t{Preço Total Efetivo} as string,\n\t\t{Causas das Alterações ao Prazo} as string,\n\t\t{Causas das Alterações ao Preço} as string,\n\t\tEstado as string,\n\t\t{N.º registo do Acordo Quadro} as string,\n\t\t{Descrição do Acordo Quadro} as string,\n\t\t{Procedimento Centralizado} as string,\n\t\t{Ligação para Peças do Procedimento} as string,\n\t\t{Lista de Fornecedores (cocontratantes)} as string,\n\t\t{Aquisição ao Abrigo de Acordo Quadro de outro Estado-membro da UE} as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\tinferDriftedColumnTypes: true) ~> ContratosPandemiaRAW\nsource(output(\n\t\tdata as date 'dd-MM-yyyy',\n\t\tdata_dados as string,\n\t\tconfirmados as integer,\n\t\tconfirmados_arsnorte as integer,\n\t\tconfirmados_arscentro as integer,\n\t\tconfirmados_arslvt as integer,\n\t\tconfirmados_arsalentejo as integer,\n\t\tconfirmados_arsalgarve as integer,\n\t\tconfirmados_acores as integer,\n\t\tconfirmados_madeira as integer,\n\t\tconfirmados_estrangeiro as string,\n\t\tconfirmados_novos as integer,\n\t\trecuperados as string,\n\t\tobitos as string,\n\t\tinternados as string,\n\t\tinternados_uci as string,\n\t\tlab as string,\n\t\tsuspeitos as string,\n\t\tvigilancia as string,\n\t\tn_confirmados as string,\n\t\tcadeias_transmissao as string,\n\t\ttransmissao_importada as string,\n\t\tconfirmados_0_9_f as string,\n\t\tconfirmados_0_9_m as string,\n\t\tconfirmados_10_19_f as string,\n\t\tconfirmados_10_19_m as string,\n\t\tconfirmados_20_29_f as string,\n\t\tconfirmados_20_29_m as string,\n\t\tconfirmados_30_39_f as string,\n\t\tconfirmados_30_39_m as string,\n\t\tconfirmados_40_49_f as string,\n\t\tconfirmados_40_49_m as string,\n\t\tconfirmados_50_59_f as string,\n\t\tconfirmados_50_59_m as string,\n\t\tconfirmados_60_69_f as string,\n\t\tconfirmados_60_69_m as string,\n\t\tconfirmados_70_79_f as string,\n\t\tconfirmados_70_79_m as string,\n\t\tconfirmados_80_plus_f as string,\n\t\tconfirmados_80_plus_m as string,\n\t\tsintomas_tosse as string,\n\t\tsintomas_febre as string,\n\t\tsintomas_dificuldade_respiratoria as string,\n\t\tsintomas_cefaleia as string,\n\t\tsintomas_dores_musculares as string,\n\t\tsintomas_fraqueza_generalizada as string,\n\t\tconfirmados_f as string,\n\t\tconfirmados_m as string,\n\t\tobitos_arsnorte as string,\n\t\tobitos_arscentro as string,\n\t\tobitos_arslvt as string,\n\t\tobitos_arsalentejo as string,\n\t\tobitos_arsalgarve as string,\n\t\tobitos_acores as string,\n\t\tobitos_madeira as string,\n\t\tobitos_estrangeiro as string,\n\t\trecuperados_arsnorte as string,\n\t\trecuperados_arscentro as string,\n\t\trecuperados_arslvt as string,\n\t\trecuperados_arsalentejo as string,\n\t\trecuperados_arsalgarve as string,\n\t\trecuperados_acores as string,\n\t\trecuperados_madeira as string,\n\t\trecuperados_estrangeiro as string,\n\t\tobitos_0_9_f as string,\n\t\tobitos_0_9_m as string,\n\t\tobitos_10_19_f as string,\n\t\tobitos_10_19_m as string,\n\t\tobitos_20_29_f as string,\n\t\tobitos_20_29_m as string,\n\t\tobitos_30_39_f as string,\n\t\tobitos_30_39_m as string,\n\t\tobitos_40_49_f as string,\n\t\tobitos_40_49_m as string,\n\t\tobitos_50_59_f as string,\n\t\tobitos_50_59_m as string,\n\t\tobitos_60_69_f as string,\n\t\tobitos_60_69_m as string,\n\t\tobitos_70_79_f as string,\n\t\tobitos_70_79_m as string,\n\t\tobitos_80_plus_f as string,\n\t\tobitos_80_plus_m as string,\n\t\tobitos_f as string,\n\t\tobitos_m as string,\n\t\tconfirmados_desconhecidos_m as string,\n\t\tconfirmados_desconhecidos_f as string,\n\t\tativos as string,\n\t\tinternados_enfermaria as string,\n\t\tconfirmados_desconhecidos as string,\n\t\tincidencia_nacional as string,\n\t\tincidencia_continente as string,\n\t\trt_nacional as string,\n\t\trt_continente as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\tinferDriftedColumnTypes: true) ~> InfetadosCOVIDdiarioRAW\nsource(output(\n\t\tdata as string,\n\t\tdata_dados as date 'dd-MM-yyyy',\n\t\tconfirmados as string,\n\t\tconfirmados_arsnorte as string,\n\t\tconfirmados_arscentro as string,\n\t\tconfirmados_arslvt as string,\n\t\tconfirmados_arsalentejo as string,\n\t\tconfirmados_arsalgarve as string,\n\t\tconfirmados_acores as string,\n\t\tconfirmados_madeira as string,\n\t\tconfirmados_estrangeiro as string,\n\t\tconfirmados_novos as string,\n\t\trecuperados as string,\n\t\tobitos as string,\n\t\tinternados as string,\n\t\tinternados_uci as string,\n\t\tlab as string,\n\t\tsuspeitos as string,\n\t\tvigilancia as string,\n\t\tn_confirmados as string,\n\t\tcadeias_transmissao as string,\n\t\ttransmissao_importada as string,\n\t\tconfirmados_0_9_f as string,\n\t\tconfirmados_0_9_m as string,\n\t\tconfirmados_10_19_f as string,\n\t\tconfirmados_10_19_m as string,\n\t\tconfirmados_20_29_f as string,\n\t\tconfirmados_20_29_m as string,\n\t\tconfirmados_30_39_f as string,\n\t\tconfirmados_30_39_m as string,\n\t\tconfirmados_40_49_f as string,\n\t\tconfirmados_40_49_m as string,\n\t\tconfirmados_50_59_f as string,\n\t\tconfirmados_50_59_m as string,\n\t\tconfirmados_60_69_f as string,\n\t\tconfirmados_60_69_m as string,\n\t\tconfirmados_70_79_f as string,\n\t\tconfirmados_70_79_m as string,\n\t\tconfirmados_80_plus_f as string,\n\t\tconfirmados_80_plus_m as string,\n\t\tsintomas_tosse as string,\n\t\tsintomas_febre as string,\n\t\tsintomas_dificuldade_respiratoria as string,\n\t\tsintomas_cefaleia as string,\n\t\tsintomas_dores_musculares as string,\n\t\tsintomas_fraqueza_generalizada as string,\n\t\tconfirmados_f as string,\n\t\tconfirmados_m as string,\n\t\tobitos_arsnorte as string,\n\t\tobitos_arscentro as string,\n\t\tobitos_arslvt as string,\n\t\tobitos_arsalentejo as string,\n\t\tobitos_arsalgarve as string,\n\t\tobitos_acores as string,\n\t\tobitos_madeira as string,\n\t\tobitos_estrangeiro as string,\n\t\trecuperados_arsnorte as string,\n\t\trecuperados_arscentro as string,\n\t\trecuperados_arslvt as string,\n\t\trecuperados_arsalentejo as string,\n\t\trecuperados_arsalgarve as string,\n\t\trecuperados_acores as string,\n\t\trecuperados_madeira as string,\n\t\trecuperados_estrangeiro as string,\n\t\tobitos_0_9_f as string,\n\t\tobitos_0_9_m as string,\n\t\tobitos_10_19_f as string,\n\t\tobitos_10_19_m as string,\n\t\tobitos_20_29_f as string,\n\t\tobitos_20_29_m as string,\n\t\tobitos_30_39_f as string,\n\t\tobitos_30_39_m as string,\n\t\tobitos_40_49_f as string,\n\t\tobitos_40_49_m as string,\n\t\tobitos_50_59_f as string,\n\t\tobitos_50_59_m as string,\n\t\tobitos_60_69_f as string,\n\t\tobitos_60_69_m as string,\n\t\tobitos_70_79_f as string,\n\t\tobitos_70_79_m as string,\n\t\tobitos_80_plus_f as string,\n\t\tobitos_80_plus_m as string,\n\t\tobitos_f as string,\n\t\tobitos_m as string,\n\t\tconfirmados_desconhecidos_m as string,\n\t\tconfirmados_desconhecidos_f as string,\n\t\tativos as string,\n\t\tinternados_enfermaria as string,\n\t\tconfirmados_desconhecidos as string,\n\t\tincidencia_nacional as string,\n\t\tincidencia_continente as string,\n\t\trt_nacional as string,\n\t\trt_continente as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> DateTABLE\nsource(output(\n\t\tDistrito as string,\n\t\t{Região de Saúde} as string,\n\t\t{População} as string,\n\t\t{População mais65 anos } as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\tinferDriftedColumnTypes: true) ~> DistritosRAW\nContratosFevMar2021RAW, ContratosMarJun2020RAW, ContratosJulyJan2021RAW, ContratosPandemiaRAW union(byName: true)~> AllCOVIDContractsRAW\nInfetadosCOVIDdiarioRAW select(mapColumn(\n\t\tdata,\n\t\t{Nº de Casos Acumulados Total Nacional} = confirmados,\n\t\tNorte = confirmados_arsnorte,\n\t\tCentro = confirmados_arscentro,\n\t\t{Lisboa e Vale do Tejo} = confirmados_arslvt,\n\t\tAlentejo = confirmados_arsalentejo,\n\t\tAlgarve = confirmados_arsalgarve,\n\t\t{Açores} = confirmados_acores,\n\t\tMadeira = confirmados_madeira,\n\t\t{Nº Novos Casos diários Total Nacional} = confirmados_novos\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> InfetadosCOVIDdiarioSELECTED\nDateTABLE select(mapColumn(\n\t\t{Data Key} = data,\n\t\tData = data_dados\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> DateTABLESELECTED\nDateTABLESELECTED derive({Mês} = month(Data),\n\t\tAno = year(Data),\n\t\tDia = dayOfMonth(Data),\n\t\t{Data Key} = concat(toString(year(Data)),toString(month(Data)),toString(dayOfMonth(Data)))) ~> DataTABLEwithmoreCOLUMNS\nAllCOVIDContractsRAW select(mapColumn(\n\t\t{Objeto do Contrato},\n\t\t{Tipo(s) de Contrato},\n\t\t{Entidade(s) Adjudicante(s)},\n\t\t{Entidade(s) Adjudicatária(s)},\n\t\t{Preço Contratual},\n\t\t{Data de Celebração do Contrato},\n\t\t{Local de Execução}\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> COVIDContratosSELECTED\nCOVIDContratosSELECTED aggregate(groupBy({Objeto do Contrato},\n\t\t{Entidade(s) Adjudicante(s)},\n\t\t{Entidade(s) Adjudicatária(s)},\n\t\t{Preço Contratual},\n\t\t{Data de Celebração do Contrato}),\n\teach(match(!in(['Objeto do Contrato','Entidade(s) Adjudicante(s)','Entidade(s) Adjudicatária(s)','Preço Contratual','Data de Celebração do Contrato'],name)), $$ = first($$))) ~> COVIDContratosREMOVEDUPLICATEROWS\nCOVIDContratosREMOVEDUPLICATEROWS alterRow(deleteIf(isNull({Preço Contratual})),\n\tdeleteIf(isNull({Objeto do Contrato})),\n\tdeleteIf(isNull({Entidade(s) Adjudicante(s)})),\n\tdeleteIf(isNull({Entidade(s) Adjudicatária(s)})),\n\tdeleteIf(isNull({Data de Celebração do Contrato})),\n\tdeleteIf(isNull({Local de Execução})),\n\tdeleteIf(isNull({Tipo(s) de Contrato}))) ~> COVIDcontratosREMOVEBLANKVALUES\nCOVIDcontratosREMOVEBLANKVALUES derive({NIF Entidade Adjudicante} = left((right({Entidade(s) Adjudicante(s)},10)),9),\n\t\t{NIF Entidade Adjudicatária} = left((right({Entidade(s) Adjudicatária(s)},10)),9),\n\t\t{Entidade Adjudicante} = replace({Entidade(s) Adjudicante(s)},right({Entidade(s) Adjudicante(s)},11),''),\n\t\t{Entidade Adjudicatária} = replace({Entidade(s) Adjudicatária(s)},right({Entidade(s) Adjudicatária(s)},11),''),\n\t\t{Distrito/Região} = split({Local de Execução},',')[2],\n\t\tConcelho = split({Local de Execução},',')[3]) ~> COVIDcontratosADDCOLUMNS\nCOVIDcontratosADDCOLUMNS select(mapColumn(\n\t\t{Objeto do Contrato},\n\t\t{Preço Contratual},\n\t\t{Data de Celebração do Contrato},\n\t\t{Tipo(s) de Contrato},\n\t\t{Local de Execução},\n\t\t{NIF Entidade Adjudicante},\n\t\t{NIF Entidade Adjudicatária},\n\t\t{Entidade Adjudicante},\n\t\t{Entidade Adjudicatária},\n\t\t{Distrito/Região},\n\t\tConcelho\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> COVIDcontratosSELECTED2\nCOVIDcontratosSELECTED2 keyGenerate(output({Nº do contrato} as long),\n\tstartAt: 1L) ~> COVIDcontratoswithSurrogateKey\nCOVIDcontratoswithSurrogateKey derive({Distrito/Região} = upper({Distrito/Região})) ~> EntidadesTabela\nEntidadesTabela select(mapColumn(\n\t\t{NIF Entidade Adjudicante},\n\t\t{Entidade Adjudicante}\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> EntidadeAdjudicanteSELECTED\nEntidadeAdjudicanteSELECTED aggregate(groupBy({NIF Entidade Adjudicante}),\n\teach(match(!in(['NIF Entidade Adjudicante'],name)), $$ = first($$))) ~> EntidadeAdjudicanteREMOVEDUPLICATEROWS\nEntidadeAdjudicanteREMOVEDUPLICATEROWS keyGenerate(output({Adjudicante Key} as long),\n\tstartAt: 1L) ~> EntidadeAdjudicantewithKEY\nEntidadesTabela select(mapColumn(\n\t\t{NIF Entidade Adjudicatária},\n\t\t{Entidade Adjudicatária}\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> EntidadeAdjudicatariaSELECTED\nEntidadeAdjudicatariaSELECTED aggregate(groupBy({NIF Entidade Adjudicatária}),\n\teach(match(!in(['NIF Entidade Adjudicatária'],name)), $$ = first($$))) ~> EntidadeAdjudicatariaREMOVEDUPLICATEROWS\nEntidadeAdjudicatariaREMOVEDUPLICATEROWS keyGenerate(output({Adjudicatária Key} as long),\n\tstartAt: 1L) ~> EntidadeAdjudicatariawithKEY\nEntidadesTabela select(mapColumn(\n\t\t{Tipo(s) de Contrato}\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> TipodeContratosSELECTED\nTipodeContratosSELECTED aggregate(groupBy({Tipo(s) de Contrato}),\n\teach(match(!in(['Tipo(s) de Contrato'],name)), $$ = first($$))) ~> TipodeContratosREMOVEDUPLICATEROWS\nTipodeContratosREMOVEDUPLICATEROWS keyGenerate(output({Tipo de Contrato Key} as long),\n\tstartAt: 1L) ~> TipodeContratoswithKEY\nDerivedColumn8 keyGenerate(output({Distrito Key} as long),\n\tstartAt: 1L) ~> DistritoswithKEY\nEntidadesTabela select(mapColumn(\n\t\t{Descrição do Contrato} = {Objeto do Contrato},\n\t\t{Nº do contrato}\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> ContratosSELECTED\nEntidadesTabela select(mapColumn(\n\t\t{Preço Contratual},\n\t\t{Data de Celebração do Contrato},\n\t\t{Tipo(s) de Contrato},\n\t\t{NIF Entidade Adjudicante},\n\t\t{NIF Entidade Adjudicatária},\n\t\t{Entidade Adjudicante},\n\t\t{Entidade Adjudicatária},\n\t\tDistrito = {Distrito/Região},\n\t\t{Nº do contrato}\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> Select1\nSelect1, TipodeContratoswithKEY join(Select1@{Tipo(s) de Contrato} == TipodeContratosREMOVEDUPLICATEROWS@{Tipo(s) de Contrato},\n\tjoinType:'right',\n\tbroadcast: 'auto')~> JoinTipodeContratos\nJoinTipodeContratos select(mapColumn(\n\t\t{Preço Contratual},\n\t\t{Data de Celebração do Contrato},\n\t\t{NIF Entidade Adjudicante},\n\t\t{NIF Entidade Adjudicatária},\n\t\tDistrito,\n\t\t{Nº do contrato},\n\t\t{Tipo de Contrato Key}\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> Select2\nSelect2, DataTABLEwithmoreCOLUMNS join({Data de Celebração do Contrato} == Data,\n\tjoinType:'right',\n\tbroadcast: 'auto')~> JoinDatatable\nJoinDatatable select(mapColumn(\n\t\t{Preço Contratual},\n\t\t{NIF Entidade Adjudicante},\n\t\t{NIF Entidade Adjudicatária},\n\t\tDistrito,\n\t\t{Nº do contrato},\n\t\t{Tipo de Contrato Key},\n\t\t{Data Key}\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> Select3\nSelect3 alterRow(deleteIf(isNull({Preço Contratual}))) ~> REMOVEROWSwithNULLVALUES\nREMOVEROWSwithNULLVALUES, EntidadeAdjudicantewithKEY join(Select3@{NIF Entidade Adjudicante} == EntidadeAdjudicanteREMOVEDUPLICATEROWS@{NIF Entidade Adjudicante},\n\tjoinType:'right',\n\tbroadcast: 'auto')~> JoinwithEntidadeAdjudicanteTable\nJoinwithEntidadeAdjudicanteTable select(mapColumn(\n\t\t{Preço Contratual},\n\t\t{NIF Entidade Adjudicatária},\n\t\tDistrito,\n\t\t{Nº do contrato},\n\t\t{Tipo de Contrato Key},\n\t\t{Data Key},\n\t\t{Adjudicante Key}\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> Select4\nSelect4, EntidadeAdjudicatariawithKEY join(Select4@{NIF Entidade Adjudicatária} == EntidadeAdjudicatariaREMOVEDUPLICATEROWS@{NIF Entidade Adjudicatária},\n\tjoinType:'right',\n\tbroadcast: 'auto')~> JoinwithEntidadeAdjudicatariaTable\nJoinwithEntidadeAdjudicatariaTable select(mapColumn(\n\t\t{Preço Contratual},\n\t\tDistrito,\n\t\t{Nº do contrato},\n\t\t{Tipo de Contrato Key},\n\t\t{Data Key},\n\t\t{Adjudicante Key},\n\t\t{Adjudicatária Key}\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> Select5\nEntidadesTabela select(mapColumn(\n\t\tDistrito = {Distrito/Região}\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> Select6\nSelect6 aggregate(groupBy(Distrito),\n\teach(match(!in(['Distrito'],name)), $$ = first($$))) ~> Aggregate1\nAggregate1 derive(Distrito = replace(Distrito,'ÉVORA<BR/>PORTUGAL','ÉVORA')) ~> DerivedColumn1\nSelect5 derive(Distrito = replace(Distrito,'ÉVORA<BR/>PORTUGAL','1')) ~> ChangeEVORArow\nChangeEVORArow derive(Distrito = replace(Distrito,'LISBOA<BR/>PORTUGAL','12')) ~> ChangeLISBOArow\nChangeLISBOArow derive(Distrito = replace(Distrito,'REGIÃO AUTÓNOMA DA MADEIRA','13')) ~> ChangeMADEIRArow\nChangeMADEIRArow derive(Distrito = replace(Distrito,'PORTO<BR/>PORTUGAL','15')) ~> ChangePORTOrow\nChangePORTOrow derive(Distrito = replace(Distrito,'SETÚBAL<BR/>PORTUGAL','17')) ~> ChangeSETUBALrow\nChangeSETUBALrow derive(Distrito = replace(Distrito,'GUARDA<BR/>PORTUGAL','10')) ~> ChangeGUARDArow\nChangeGUARDArow derive(Distrito = replace(Distrito,'DISTRITO NÃO DETERMINADO','21')) ~> ChangeNAOIDENTIFICADOrow\nChangeNAOIDENTIFICADOrow derive(Distrito = replace(Distrito,'PORTUGAL CONTINENTAL','21')) ~> ChangePORTUGALCONTrow\nDerivedColumnBRAGANCA derive(Distrito = replace(Distrito,'SANTARÉM<BR/>PORTUGAL','16')) ~> ChangeSANTAREMrow\nDerivedColumn2 derive(Distrito = replace({Distrito},'LEIRIA<BR/>PORTUGAL','11')) ~> ChangeLEIRIArow\nChangeLEIRIArow derive(Distrito = replace(Distrito,'REGIÃO AUTÓNOMA DOS AÇORES','2')) ~> ChangeACORESrow\nChangeLEIRIArow aggregate(groupBy(Distrito),\n\teach(match(!in(['Distrito'],name)), $$ = first($$))) ~> Aggregate2\nChangePORTUGALCONTrow derive(Distrito = replace(Distrito,'BRAGANCA','6')) ~> DerivedColumnBRAGANCA\nChangeSANTAREMrow derive(Distrito = iifNull(Distrito,'21')) ~> DerivedColumn2\nDistritosRAW derive(Distrito = replace({Distrito},'Ã‰VORA','ÉVORA')) ~> DerivedColumn3\nDerivedColumn3 derive(Distrito = replace({Distrito},'AÃ‡ORES','AÇORES')) ~> DerivedColumn4\nDerivedColumn4 derive(Distrito = replace(Distrito,'BRAGANÃ‡A','BRAGANÇA')) ~> DerivedColumn5\nDerivedColumn5 derive(Distrito = replace(Distrito,'SANTARÃ‰M','SANTARÉM')) ~> DerivedColumn6\nDerivedColumn6 derive(Distrito = replace(Distrito,'SETÃšBAL','SETÚBAL')) ~> DerivedColumn7\nDerivedColumn7 derive({Região de Saúde} = replace({Região de Saúde},'AÃ§ores','Açores')) ~> DerivedColumn8\nChangeACORESrow derive(Distrito = replace(Distrito,'ÉVORA','1')) ~> DerivedColumn9\nDerivedColumn9 derive(Distrito = replace(Distrito,'VISEU','20')) ~> DerivedColumn10\nDerivedColumn10 derive(Distrito = replace(Distrito,'FARO','9')) ~> DerivedColumn11\nDerivedColumn11 derive(Distrito = replace(Distrito,'SETÚBAL','17')) ~> DerivedColumn12\nDerivedColumn12 derive(Distrito = replace(Distrito,'VIANA DO CASTELO','18')) ~> DerivedColumn13\nDerivedColumn13 derive(Distrito = replace(Distrito,'SANTARÉM','16')) ~> DerivedColumn14\nDerivedColumn14 derive(Distrito = replace(Distrito,'PORTO','15')) ~> DerivedColumn15\nDerivedColumn15 derive(Distrito = replace(Distrito,'VILA REAL','19')) ~> DerivedColumn16\nDerivedColumn16 derive(Distrito = replace(Distrito,'BEJA','4')) ~> DerivedColumn17\nDerivedColumn17 derive(Distrito = replace(Distrito,'BRAGA','5')) ~> DerivedColumn18\nDerivedColumn18 derive(Distrito = replace(Distrito,'LEIRIA','11')) ~> DerivedColumn19\nDerivedColumn19 derive(Distrito = replace(Distrito,'CASTELO BRANCO','7')) ~> DerivedColumn20\nDerivedColumn20 derive(Distrito = replace(Distrito,'PORTALEGRE','14')) ~> DerivedColumn21\nDerivedColumn21 derive(Distrito = replace(Distrito,'LISBOA','12')) ~> DerivedColumn22\nDerivedColumn22 derive(Distrito = replace(Distrito,'AVEIRO','3')) ~> DerivedColumn23\nDerivedColumn23 derive(Distrito = replace(Distrito,'COIMBRA','8')) ~> DerivedColumn24\nDerivedColumn24 derive(Distrito = replace(Distrito,'GUARDA','10')) ~> DerivedColumn25\nDerivedColumn25 select(mapColumn(\n\t\t{Preço Contratual},\n\t\t{Distrito Key} = Distrito,\n\t\t{Nº do contrato},\n\t\t{Tipo de Contrato Key},\n\t\t{Data Key},\n\t\t{Adjudicante Key},\n\t\t{Adjudicatária Key}\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> Select7\nDerivedColumn25 aggregate(groupBy(Distrito),\n\teach(match(!in(['Distrito'],name)), $$ = first($$))) ~> Aggregate3\nInfetadosCOVIDdiarioSELECTED, DataTABLEwithmoreCOLUMNS join(InfetadosCOVIDdiarioSELECTED@data == DateTABLESELECTED@Data,\n\tjoinType:'inner',\n\tbroadcast: 'auto')~> Join1\nJoin1 select(mapColumn(\n\t\t{Nº de Casos Acumulados Total Nacional},\n\t\tNorte,\n\t\tCentro,\n\t\t{Lisboa e Vale do Tejo},\n\t\tAlentejo,\n\t\tAlgarve,\n\t\t{Açores},\n\t\tMadeira,\n\t\t{Nº Novos Casos diários Total Nacional},\n\t\t{Data Key}\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> Select8\nContratosSELECTED sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tpartitionFileNames:['Contratos.csv'],\n\tpartitionBy('hash', 1),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> COVIDContractsPROCESSED\nSelect8 sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tpartitionFileNames:['DadosCOVID.csv'],\n\tpartitionBy('hash', 1),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> InfetadosCOVIDdiarioPROCESSED\nDataTABLEwithmoreCOLUMNS sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tpartitionFileNames:['Data.csv'],\n\tpartitionBy('hash', 1),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> DateTABLEPROCESSED\nEntidadeAdjudicantewithKEY sink(input(\n\t\tdata as string,\n\t\tconfirmados as string,\n\t\tconfirmados_arsnorte as string,\n\t\tconfirmados_arscentro as string,\n\t\tconfirmados_arslvt as string,\n\t\tconfirmados_arsalentejo as string,\n\t\tconfirmados_arsalgarve as string,\n\t\tconfirmados_acores as string,\n\t\tconfirmados_madeira as string,\n\t\tconfirmados_estrangeiro as string,\n\t\tconfirmados_novos as string,\n\t\tlab as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tpartitionFileNames:['EntidadeAdjudicante.csv'],\n\tpartitionBy('hash', 1),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> EntidadeAdjudicantePROCESSED\nEntidadeAdjudicatariawithKEY sink(input(\n\t\tdata as string,\n\t\tconfirmados as string,\n\t\tconfirmados_arsnorte as string,\n\t\tconfirmados_arscentro as string,\n\t\tconfirmados_arslvt as string,\n\t\tconfirmados_arsalentejo as string,\n\t\tconfirmados_arsalgarve as string,\n\t\tconfirmados_acores as string,\n\t\tconfirmados_madeira as string,\n\t\tconfirmados_estrangeiro as string,\n\t\tconfirmados_novos as string,\n\t\tlab as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tpartitionFileNames:['EntidadeAdjudicatária.csv'],\n\tpartitionBy('hash', 1),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> EntidadeAdjudicatariaPROCESSED\nTipodeContratoswithKEY sink(input(\n\t\tdata as string,\n\t\tconfirmados as string,\n\t\tconfirmados_arsnorte as string,\n\t\tconfirmados_arscentro as string,\n\t\tconfirmados_arslvt as string,\n\t\tconfirmados_arsalentejo as string,\n\t\tconfirmados_arsalgarve as string,\n\t\tconfirmados_acores as string,\n\t\tconfirmados_madeira as string,\n\t\tconfirmados_estrangeiro as string,\n\t\tconfirmados_novos as string,\n\t\tlab as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tpartitionFileNames:['TipodeContrato.csv'],\n\tpartitionBy('hash', 1),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> TipodeContratoPROCESSED\nDistritoswithKEY sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tpartitionFileNames:['Distritos.csv'],\n\tpartitionBy('hash', 1),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> DistritosPROCESSED\nSelect7 sink(input(\n\t\t{Descrição do Contrato} as string,\n\t\t{Nº do contrato} as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tpartitionFileNames:['ContratosCOVID.csv'],\n\tpartitionBy('hash', 1),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> ContratosCOVIDPROCESSED"
+		}
+	}
+}

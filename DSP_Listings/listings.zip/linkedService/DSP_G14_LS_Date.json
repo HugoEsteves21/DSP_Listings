@@ -1,0 +1,13 @@
+{
+	"name": "DSP_G14_LS_Date",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "HttpServer",
+		"typeProperties": {
+			"url": "https://raw.githubusercontent.com/jayc182/walmart/main/Date%20-%20Com%20melhoramentos.csv",
+			"enableServerCertificateValidation": true,
+			"authenticationType": "Anonymous"
+		}
+	}
+}

@@ -1,0 +1,54 @@
+{
+	"name": "DSP_T02_G11_rh_hirarq_SILVER",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "DSP_T02_G11_LS_Silver",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "rh_hierq.xlsx.csv",
+				"folderPath": "t02/DSP_T02_G11/RAW",
+				"fileSystem": "storage"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "dim_nome",
+				"type": "String"
+			},
+			{
+				"name": "dim_id",
+				"type": "String"
+			},
+			{
+				"name": "grv_name",
+				"type": "String"
+			},
+			{
+				"name": "grv_id",
+				"type": "String"
+			},
+			{
+				"name": "subzona",
+				"type": "String"
+			},
+			{
+				"name": "zona",
+				"type": "String"
+			},
+			{
+				"name": "país",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

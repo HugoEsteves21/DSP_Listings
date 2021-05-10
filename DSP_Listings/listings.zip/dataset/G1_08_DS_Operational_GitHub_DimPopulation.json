@@ -1,0 +1,27 @@
+{
+	"name": "G1_08_DS_Operational_GitHub_DimPopulation",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "G1_08_LS_Operational_GitHub_DimPopulation",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "HttpServerLocation"
+			},
+			"columnDelimiter": ";",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "Country Key;Time Key;Proportion of population aged 0-14 years;Proportion of population aged 15-24 years;Proportion of population aged 25-49 years;Proportion of population aged 50-64 years;Proportion of population aged 65-79 years;Proportion of population aged 80 years and more;População Ativa Masculina;População Ativa Feminina",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

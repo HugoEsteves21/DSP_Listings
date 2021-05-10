@@ -1,0 +1,23 @@
+{
+	"name": "DelimitedText73",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "DSP_T02_G16_LS_AzureDataLakeStore_to_ADF",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"folderPath": "t02/DSP_T02_G16/PROCESSED",
+				"fileSystem": "storage"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"quoteChar": "\""
+		},
+		"schema": []
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

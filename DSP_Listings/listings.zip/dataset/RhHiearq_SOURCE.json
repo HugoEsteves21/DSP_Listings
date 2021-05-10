@@ -1,0 +1,52 @@
+{
+	"name": "RhHiearq_SOURCE",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "DSP_LS_T2G11_SOURCE",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Excel",
+		"typeProperties": {
+			"sheetName": "hierarquia_rh",
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "rh_hierq.xlsx",
+				"folderPath": "t02/DSP_T02_G11/SOURCE",
+				"container": "storage"
+			},
+			"firstRowAsHeader": true
+		},
+		"schema": [
+			{
+				"name": "dim_nome",
+				"type": "String"
+			},
+			{
+				"name": "dim_id",
+				"type": "String"
+			},
+			{
+				"name": "grv_name",
+				"type": "String"
+			},
+			{
+				"name": "grv_id",
+				"type": "String"
+			},
+			{
+				"name": "subzona",
+				"type": "String"
+			},
+			{
+				"name": "zona",
+				"type": "String"
+			},
+			{
+				"name": "país",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

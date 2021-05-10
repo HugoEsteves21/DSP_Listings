@@ -1,0 +1,61 @@
+{
+	"name": "DSP_T02_G11_geogr_hiearq",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "DSP_LS_T02_G11_DataLakeRAW",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"folderPath": "t02/DSP_T02_G11/RAW",
+				"fileSystem": "storage"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "data_id",
+				"type": "String"
+			},
+			{
+				"name": "data",
+				"type": "String"
+			},
+			{
+				"name": "ano",
+				"type": "String"
+			},
+			{
+				"name": "trimestre",
+				"type": "String"
+			},
+			{
+				"name": "mês",
+				"type": "String"
+			},
+			{
+				"name": "mês_nome",
+				"type": "String"
+			},
+			{
+				"name": "dia_semana_nome",
+				"type": "String"
+			},
+			{
+				"name": "semana_fim/semana",
+				"type": "String"
+			},
+			{
+				"name": "dia",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

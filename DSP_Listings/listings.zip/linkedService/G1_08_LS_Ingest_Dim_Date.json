@@ -1,0 +1,13 @@
+{
+	"name": "G1_08_LS_Ingest_Dim_Date",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "HttpServer",
+		"typeProperties": {
+			"url": "https://github.com/rguerreiro87/dsp/blob/main/Dim_DateDate.csv",
+			"enableServerCertificateValidation": true,
+			"authenticationType": "Anonymous"
+		}
+	}
+}

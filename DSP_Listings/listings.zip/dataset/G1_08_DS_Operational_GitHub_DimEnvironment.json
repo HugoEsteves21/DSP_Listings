@@ -1,0 +1,27 @@
+{
+	"name": "G1_08_DS_Operational_GitHub_DimEnvironment",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "G1_08_LS_Operational_GitHub_DimEnvironment",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "HttpServerLocation"
+			},
+			"columnDelimiter": ";",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "Country Key;Date Key;Greenhouse gas emissions (in CO2 equivalent);Total energy;Renewables and biofuels;",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

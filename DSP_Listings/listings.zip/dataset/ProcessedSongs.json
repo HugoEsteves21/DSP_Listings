@@ -1,0 +1,106 @@
+{
+	"name": "ProcessedSongs",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LSADLS",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "SongsProcessed.csv",
+				"folderPath": "t01/DSP_G01_02/Processed",
+				"fileSystem": "storage"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "SongKey",
+				"type": "String"
+			},
+			{
+				"name": "SongName",
+				"type": "String"
+			},
+			{
+				"name": "SongPopularity",
+				"type": "String"
+			},
+			{
+				"name": "Duration_ms",
+				"type": "String"
+			},
+			{
+				"name": "Explicit",
+				"type": "String"
+			},
+			{
+				"name": "Danceability",
+				"type": "String"
+			},
+			{
+				"name": "Energy",
+				"type": "String"
+			},
+			{
+				"name": "Chave",
+				"type": "String"
+			},
+			{
+				"name": "Loudness",
+				"type": "String"
+			},
+			{
+				"name": "Mode",
+				"type": "String"
+			},
+			{
+				"name": "Speechiness",
+				"type": "String"
+			},
+			{
+				"name": "Acousticness",
+				"type": "String"
+			},
+			{
+				"name": "Instrumentalness",
+				"type": "String"
+			},
+			{
+				"name": "Liveness",
+				"type": "String"
+			},
+			{
+				"name": "Valence",
+				"type": "String"
+			},
+			{
+				"name": "Tempo",
+				"type": "String"
+			},
+			{
+				"name": "Time_signature",
+				"type": "String"
+			},
+			{
+				"name": "StartDate",
+				"type": "String"
+			},
+			{
+				"name": "EndDate",
+				"type": "String"
+			},
+			{
+				"name": "CurrentRowIndicator",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

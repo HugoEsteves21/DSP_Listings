@@ -1,0 +1,25 @@
+{
+	"name": "DSP_T02_G11_Sellout_Silver",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "DSP_T02_G11_LS_Silver",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "Sellout.csv",
+				"folderPath": "t02/DSP_T02_G11/SILVER",
+				"fileSystem": "storage"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": []
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

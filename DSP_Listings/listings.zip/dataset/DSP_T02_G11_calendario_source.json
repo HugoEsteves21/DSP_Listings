@@ -1,0 +1,62 @@
+{
+	"name": "DSP_T02_G11_calendario_source",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "DSP_LS_T2G11_SOURCE",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "calendário.csv",
+				"folderPath": "t02/DSP_T02_G11/SOURCE",
+				"container": "storage"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "data_id",
+				"type": "String"
+			},
+			{
+				"name": "data",
+				"type": "String"
+			},
+			{
+				"name": "ano",
+				"type": "String"
+			},
+			{
+				"name": "trimestre",
+				"type": "String"
+			},
+			{
+				"name": "mês",
+				"type": "String"
+			},
+			{
+				"name": "mês_nome",
+				"type": "String"
+			},
+			{
+				"name": "dia_semana_nome",
+				"type": "String"
+			},
+			{
+				"name": "semana_fim/semana",
+				"type": "String"
+			},
+			{
+				"name": "dia",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

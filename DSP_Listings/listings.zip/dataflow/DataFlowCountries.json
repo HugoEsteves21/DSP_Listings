@@ -1,0 +1,76 @@
+{
+	"name": "DataFlowCountries",
+	"properties": {
+		"folder": {
+			"name": "DSP_G01_02"
+		},
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "G01_02CountryDimensionRaw",
+						"type": "DatasetReference"
+					},
+					"name": "CountriesRaw"
+				},
+				{
+					"dataset": {
+						"referenceName": "AzureSqlTable11",
+						"type": "DatasetReference"
+					},
+					"name": "CountriesDW"
+				},
+				{
+					"dataset": {
+						"referenceName": "AzureSqlTable12",
+						"type": "DatasetReference"
+					},
+					"name": "CountriesDWsecondvalidation"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "testeqwqe",
+						"type": "DatasetReference"
+					},
+					"name": "SinktoADLSProcessed"
+				}
+			],
+			"transformations": [
+				{
+					"name": "ComparedatainRAWtoDW"
+				},
+				{
+					"name": "ComparedatainDWtoRaw"
+				},
+				{
+					"name": "UpdateSCD"
+				},
+				{
+					"name": "Filteractiverows"
+				},
+				{
+					"name": "ComparadatainDWsecondvalidation"
+				},
+				{
+					"name": "Filteractiverowssecondvalidation"
+				},
+				{
+					"name": "ComparadatainDWtoRawsecondvalidation"
+				},
+				{
+					"name": "Inactiverows"
+				},
+				{
+					"name": "Unionactivewithinactiverows"
+				},
+				{
+					"name": "Unionwithinactiverows"
+				}
+			],
+			"script": "source(output(\n\t\tCountryKey as short,\n\t\tCountryName as string,\n\t\tCountryAbbreviation as string,\n\t\tCountryPopulation as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> CountriesRaw\nsource(output(\n\t\tCountryKey as integer,\n\t\tCountryName as string,\n\t\tCountryAbbreviation as string,\n\t\tCountryPopulation as string,\n\t\tStartDate as timestamp,\n\t\tEndDate as timestamp,\n\t\tCurrentRowIndicator as integer\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tisolationLevel: 'READ_UNCOMMITTED',\n\tformat: 'table') ~> CountriesDW\nsource(output(\n\t\tCountryKey as integer,\n\t\tCountryName as string,\n\t\tCountryAbbreviation as string,\n\t\tCountryPopulation as string,\n\t\tStartDate as timestamp,\n\t\tEndDate as timestamp,\n\t\tCurrentRowIndicator as integer\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tisolationLevel: 'READ_UNCOMMITTED',\n\tformat: 'table') ~> CountriesDWsecondvalidation\nCountriesRaw, Filteractiverows exists(CountriesRaw@CountryKey == CountriesDW@CountryKey\n\t&& CountriesRaw@CountryPopulation == CountriesDW@CountryPopulation,\n\tnegate:true,\n\tbroadcast: 'auto')~> ComparedatainRAWtoDW\nFilteractiverows, CountriesRaw exists(CountriesDW@CountryKey == CountriesRaw@CountryKey\n\t&& CountriesDW@CountryPopulation == CountriesRaw@CountryPopulation,\n\tnegate:false,\n\tbroadcast: 'auto')~> ComparedatainDWtoRaw\nComparedatainRAWtoDW derive(StartDate = currentUTC(),\n\t\tEndDate = toTimestamp(toString(null())),\n\t\tCurrentRowIndicator = 1) ~> UpdateSCD\nCountriesDW filter(toInteger(byName('CurrentRowIndicator')) ==1) ~> Filteractiverows\nFilteractiverowssecondvalidation, CountriesRaw exists(CountriesDWsecondvalidation@CountryKey == CountriesRaw@CountryKey,\n\tnegate:false,\n\tbroadcast: 'auto')~> ComparadatainDWsecondvalidation\nCountriesDWsecondvalidation filter(toInteger(byName('CurrentRowIndicator')) ==1) ~> Filteractiverowssecondvalidation\nComparadatainDWsecondvalidation, CountriesRaw exists(CountriesDWsecondvalidation@CountryKey == CountriesRaw@CountryKey\n\t&& CountriesDWsecondvalidation@CountryPopulation == CountriesRaw@CountryPopulation,\n\tnegate:true,\n\tbroadcast: 'auto')~> ComparadatainDWtoRawsecondvalidation\nComparadatainDWtoRawsecondvalidation derive(EndDate = currentUTC(),\n\t\tCurrentRowIndicator = 0) ~> Inactiverows\nUpdateSCD, Unionwithinactiverows union(byName: true)~> Unionactivewithinactiverows\nComparedatainDWtoRaw, Inactiverows union(byName: true)~> Unionwithinactiverows\nUnionactivewithinactiverows sink(input(\n\t\tCountryKey as string,\n\t\tCountryName as string,\n\t\tCountryAbbreviation as string,\n\t\tCountryPopulation as string,\n\t\tStartDate as string,\n\t\tEndDate as string,\n\t\tCurrentRowIndicator as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tpartitionFileNames:['CountriesProcessed.csv'],\n\tpartitionBy('hash', 1),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> SinktoADLSProcessed"
+		}
+	}
+}

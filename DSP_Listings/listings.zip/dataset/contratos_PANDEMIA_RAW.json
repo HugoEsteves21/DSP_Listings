@@ -1,0 +1,122 @@
+{
+	"name": "contratos_PANDEMIA_RAW",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "T02_DSP_GR03_LS_ADLS2",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "contratos_PANDEMIA.csv",
+				"folderPath": "t02/DSP_G2_12/Raw",
+				"fileSystem": "storage"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "Objeto do Contrato",
+				"type": "String"
+			},
+			{
+				"name": "Tipo de Procedimento",
+				"type": "String"
+			},
+			{
+				"name": "Tipo(s) de Contrato",
+				"type": "String"
+			},
+			{
+				"name": "CPVs",
+				"type": "String"
+			},
+			{
+				"name": "Entidade(s) Adjudicante(s)",
+				"type": "String"
+			},
+			{
+				"name": "Entidade(s) Adjudicatária(s)",
+				"type": "String"
+			},
+			{
+				"name": "Preço Contratual",
+				"type": "String"
+			},
+			{
+				"name": "Data de Publicação",
+				"type": "String"
+			},
+			{
+				"name": "Data de Celebração do Contrato",
+				"type": "String"
+			},
+			{
+				"name": "Prazo de Execução",
+				"type": "String"
+			},
+			{
+				"name": "Local de Execução",
+				"type": "String"
+			},
+			{
+				"name": "Fundamentação",
+				"type": "String"
+			},
+			{
+				"name": "Causa de Extinção do Contrato",
+				"type": "String"
+			},
+			{
+				"name": "Data de Fecho do Contrato",
+				"type": "String"
+			},
+			{
+				"name": "Preço Total Efetivo",
+				"type": "String"
+			},
+			{
+				"name": "Causas das Alterações ao Prazo",
+				"type": "String"
+			},
+			{
+				"name": "Causas das Alterações ao Preço",
+				"type": "String"
+			},
+			{
+				"name": "Estado",
+				"type": "String"
+			},
+			{
+				"name": "N.º registo do Acordo Quadro",
+				"type": "String"
+			},
+			{
+				"name": "Descrição do Acordo Quadro",
+				"type": "String"
+			},
+			{
+				"name": "Procedimento Centralizado",
+				"type": "String"
+			},
+			{
+				"name": "Ligação para Peças do Procedimento",
+				"type": "String"
+			},
+			{
+				"name": "Lista de Fornecedores (cocontratantes)",
+				"type": "String"
+			},
+			{
+				"name": "Aquisição ao Abrigo de Acordo Quadro de outro Estado-membro da UE",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

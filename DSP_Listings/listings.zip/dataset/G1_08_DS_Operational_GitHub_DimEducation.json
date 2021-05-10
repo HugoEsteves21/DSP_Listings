@@ -1,0 +1,27 @@
+{
+	"name": "G1_08_DS_Operational_GitHub_DimEducation",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "G1_08_LS_Operational_GitHub_DimEducation",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "HttpServerLocation"
+			},
+			"columnDelimiter": ";",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "Education Key;Country;Year;Primary;Lower secondary;Upper secondary;Bachelor's;Master's;Doctoral ;Expected Years of Education;Investment",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

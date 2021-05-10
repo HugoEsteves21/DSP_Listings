@@ -1,0 +1,79 @@
+{
+	"name": "DataFlowSongs",
+	"properties": {
+		"folder": {
+			"name": "DSP_G01_02"
+		},
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "RawSongs",
+						"type": "DatasetReference"
+					},
+					"name": "SongsRaw"
+				},
+				{
+					"dataset": {
+						"referenceName": "SongsDatabase1",
+						"type": "DatasetReference"
+					},
+					"name": "SongsDW"
+				},
+				{
+					"dataset": {
+						"referenceName": "SongsDatabase1",
+						"type": "DatasetReference"
+					},
+					"name": "SongsDWsecondvalidation"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "SongsToADLS",
+						"type": "DatasetReference"
+					},
+					"name": "SinktoADLSProcessed"
+				}
+			],
+			"transformations": [
+				{
+					"name": "RenameColumnstomatchDW"
+				},
+				{
+					"name": "ComparedatainRAWtoDW"
+				},
+				{
+					"name": "DerivedColumn1"
+				},
+				{
+					"name": "Filteractiverows"
+				},
+				{
+					"name": "ComparedatainDWtoRaw"
+				},
+				{
+					"name": "Filteractiverowssecondvalidation"
+				},
+				{
+					"name": "ComparadatainDWsecondvalidation"
+				},
+				{
+					"name": "ComparadatainDWtoRawsecondvalidation"
+				},
+				{
+					"name": "Inactiverows"
+				},
+				{
+					"name": "Unionwithinactiverows"
+				},
+				{
+					"name": "Unionactivewithinactiverows"
+				}
+			],
+			"script": "source(output(\n\t\tid as string,\n\t\tname as string,\n\t\tpopularity as string,\n\t\tduration_ms as string,\n\t\texplicit as string,\n\t\tartists as string,\n\t\tid_artists as string,\n\t\trelease_date as string,\n\t\tdanceability as string,\n\t\tenergy as string,\n\t\tchave as string,\n\t\tloudness as string,\n\t\tmode as string,\n\t\tspeechiness as string,\n\t\tacousticness as string,\n\t\tinstrumentalness as string,\n\t\tliveness as string,\n\t\tvalence as string,\n\t\ttempo as string,\n\t\ttime_signature as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> SongsRaw\nsource(output(\n\t\tSongKey as string,\n\t\tSongName as string,\n\t\tSongPopularity as string,\n\t\tDuration_ms as string,\n\t\tExplicit as string,\n\t\tDanceability as string,\n\t\tEnergy as string,\n\t\tChave as string,\n\t\tLoudness as string,\n\t\tMode as string,\n\t\tSpeechiness as string,\n\t\tAcousticness as string,\n\t\tInstrumentalness as string,\n\t\tLiveness as string,\n\t\tValence as string,\n\t\tTempo as string,\n\t\tTime_signature as string,\n\t\tStartDate as timestamp,\n\t\tEndDate as timestamp,\n\t\tCurrentRowIndicator as integer\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tisolationLevel: 'READ_UNCOMMITTED',\n\tformat: 'table') ~> SongsDW\nsource(output(\n\t\tSongKey as string,\n\t\tSongName as string,\n\t\tSongPopularity as string,\n\t\tDuration_ms as string,\n\t\tExplicit as string,\n\t\tDanceability as string,\n\t\tEnergy as string,\n\t\tChave as string,\n\t\tLoudness as string,\n\t\tMode as string,\n\t\tSpeechiness as string,\n\t\tAcousticness as string,\n\t\tInstrumentalness as string,\n\t\tLiveness as string,\n\t\tValence as string,\n\t\tTempo as string,\n\t\tTime_signature as string,\n\t\tStartDate as timestamp,\n\t\tEndDate as timestamp,\n\t\tCurrentRowIndicator as integer\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tisolationLevel: 'READ_UNCOMMITTED',\n\tformat: 'table') ~> SongsDWsecondvalidation\nSongsRaw select(mapColumn(\n\t\tSongKey = id,\n\t\tSongName = name,\n\t\tSongPopularity = popularity,\n\t\tDuration_ms = duration_ms,\n\t\tExplicit = explicit,\n\t\tDanceability = danceability,\n\t\tEnergy = energy,\n\t\tChave = chave,\n\t\tLoudness = loudness,\n\t\tMode = mode,\n\t\tSpeechiness = speechiness,\n\t\tAcousticness = acousticness,\n\t\tInstrumentalness = instrumentalness,\n\t\tLiveness = liveness,\n\t\tValence = valence,\n\t\tTempo = tempo,\n\t\tTime_signature = time_signature\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> RenameColumnstomatchDW\nRenameColumnstomatchDW, SongsDW exists(RenameColumnstomatchDW@SongKey == SongsDW@SongKey\n\t&& RenameColumnstomatchDW@SongPopularity == SongsDW@SongPopularity,\n\tnegate:true,\n\tbroadcast: 'auto')~> ComparedatainRAWtoDW\nComparedatainRAWtoDW derive(StartDate = currentUTC(),\n\t\tEndDate = toTimestamp(toString(null())),\n\t\tCurrentRowIndicator = 1) ~> DerivedColumn1\nSongsDW filter(toInteger(byName('CurrentRowIndicator')) ==1) ~> Filteractiverows\nFilteractiverows, RenameColumnstomatchDW exists(SongsDW@SongKey == RenameColumnstomatchDW@SongKey\n\t&& SongsDW@SongPopularity == RenameColumnstomatchDW@SongPopularity,\n\tnegate:false,\n\tbroadcast: 'auto')~> ComparedatainDWtoRaw\nSongsDWsecondvalidation filter(toInteger(byName('CurrentRowIndicator')) ==1) ~> Filteractiverowssecondvalidation\nFilteractiverowssecondvalidation, RenameColumnstomatchDW exists(SongsDWsecondvalidation@SongKey == RenameColumnstomatchDW@SongKey,\n\tnegate:false,\n\tbroadcast: 'auto')~> ComparadatainDWsecondvalidation\nComparadatainDWsecondvalidation, SongsRaw exists(SongKey == id\n\t&& SongPopularity == popularity,\n\tnegate:true,\n\tbroadcast: 'auto')~> ComparadatainDWtoRawsecondvalidation\nComparadatainDWtoRawsecondvalidation derive(EndDate = currentUTC(),\n\t\tCurrentRowIndicator = 0) ~> Inactiverows\nComparedatainDWtoRaw, Inactiverows union(byName: true)~> Unionwithinactiverows\nDerivedColumn1, Unionwithinactiverows union(byName: true)~> Unionactivewithinactiverows\nUnionactivewithinactiverows sink(input(\n\t\tArtistKey as string,\n\t\tArtistFollowers as string,\n\t\tArtistGenres as string,\n\t\tArtistName as string,\n\t\tArtistPopularity as string,\n\t\tStartDate as string,\n\t\tEndDate as string,\n\t\tCurrentRowIndicator as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tpartitionFileNames:['SongsProcessed.csv'],\n\tpartitionBy('hash', 1),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> SinktoADLSProcessed"
+		}
+	}
+}

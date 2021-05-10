@@ -1,0 +1,52 @@
+{
+	"name": "DSP_T02_G11_prod_hiearq_source",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "DSP_LS_T2G11_SOURCE",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Excel",
+		"typeProperties": {
+			"sheetName": "hierarquia_rh",
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "rh_hierq.xlsx",
+				"folderPath": "t02/DSP_T02_G11/SOURCE",
+				"container": "storage"
+			},
+			"firstRowAsHeader": true
+		},
+		"schema": [
+			{
+				"name": "prod_id",
+				"type": "String"
+			},
+			{
+				"name": "produto",
+				"type": "String"
+			},
+			{
+				"name": "classe_terapeutica",
+				"type": "String"
+			},
+			{
+				"name": "laboratório",
+				"type": "String"
+			},
+			{
+				"name": "pva",
+				"type": "String"
+			},
+			{
+				"name": "ponderações",
+				"type": "String"
+			},
+			{
+				"name": "Logo",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

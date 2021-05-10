@@ -1,0 +1,68 @@
+{
+	"name": "DataFlowSongStreaming",
+	"properties": {
+		"folder": {
+			"name": "DSP_G01_02"
+		},
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "Top200SongsRaw",
+						"type": "DatasetReference"
+					},
+					"name": "Top200Raw"
+				},
+				{
+					"dataset": {
+						"referenceName": "DateDimension",
+						"type": "DatasetReference"
+					},
+					"name": "DateDimension"
+				},
+				{
+					"dataset": {
+						"referenceName": "Keys",
+						"type": "DatasetReference"
+					},
+					"name": "ArtistDimension"
+				},
+				{
+					"dataset": {
+						"referenceName": "DWSongStreaming",
+						"type": "DatasetReference"
+					},
+					"name": "SongStreamingDW"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "SongsStreamingProcessed",
+						"type": "DatasetReference"
+					},
+					"name": "SinktoADLSProcessed"
+				}
+			],
+			"transformations": [
+				{
+					"name": "ObtainDateKey"
+				},
+				{
+					"name": "ObtainArtistandSongKey"
+				},
+				{
+					"name": "SelectcolumnstoDW"
+				},
+				{
+					"name": "SelectonlycolumnstoDW"
+				},
+				{
+					"name": "UnionwithTOP200keys"
+				}
+			],
+			"script": "source(output(\n\t\tPosition as string,\n\t\t{Track Name} as string,\n\t\tArtist as string,\n\t\tStreams as string,\n\t\tDate as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> Top200Raw\nsource(output(\n\t\t{Date Key} as string,\n\t\t{Week start date} as string,\n\t\t{Week end date} as string,\n\t\t{Week number} as string,\n\t\tMonth as string,\n\t\tYear as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tisolationLevel: 'READ_UNCOMMITTED',\n\tformat: 'table') ~> DateDimension\nsource(output(\n\t\t{Track Name} as string,\n\t\tArtist as string,\n\t\tTrackKey as string,\n\t\tArtistKey as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> ArtistDimension\nsource(output(\n\t\tStreamedDateKey as string,\n\t\tSongKey as string,\n\t\tArtistKey as string,\n\t\tStreams as string,\n\t\tSongrankingposition as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tisolationLevel: 'READ_UNCOMMITTED',\n\tformat: 'table') ~> SongStreamingDW\nDateDimension, SelectcolumnstoDW join({Week start date} == Date,\n\tjoinType:'right',\n\tbroadcast: 'auto')~> ObtainDateKey\nTop200Raw, ArtistDimension join(Top200Raw@{Track Name} == ArtistDimension@{Track Name}\n\t&& Top200Raw@Artist == ArtistDimension@Artist,\n\tjoinType:'left',\n\tbroadcast: 'auto')~> ObtainArtistandSongKey\nObtainArtistandSongKey select(mapColumn(\n\t\tPosition,\n\t\tStreams,\n\t\tDate,\n\t\tTrackKey,\n\t\tArtistKey\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> SelectcolumnstoDW\nObtainDateKey select(mapColumn(\n\t\tStreamedDateKey = {Date Key},\n\t\tSongKey = TrackKey,\n\t\tArtistKey,\n\t\tStreams,\n\t\tSongrankingposition = Position\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> SelectonlycolumnstoDW\nSongStreamingDW, SelectonlycolumnstoDW union(byName: true)~> UnionwithTOP200keys\nUnionwithTOP200keys sink(input(\n\t\tArtistKey as string,\n\t\tArtistFollowers as string,\n\t\tArtistGenres as string,\n\t\tArtistName as string,\n\t\tArtistPopularity as string,\n\t\tStartDate as string,\n\t\tEndDate as string,\n\t\tCurrentRowIndicator as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tpartitionFileNames:['SongStreaming.csv'],\n\tpartitionBy('hash', 1),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> SinktoADLSProcessed"
+		}
+	}
+}

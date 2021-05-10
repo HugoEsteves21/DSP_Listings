@@ -1,0 +1,44 @@
+{
+	"name": "Dim_SchoolsPT_G16",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "DSP_G16_LS_AzureDataLakeStore_to_ADF",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Excel",
+		"typeProperties": {
+			"sheetName": "tblEscolas",
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "tblEscolas.xlsx",
+				"folderPath": "t02/DSP_G16/RAW",
+				"fileSystem": "storage"
+			},
+			"firstRowAsHeader": true
+		},
+		"schema": [
+			{
+				"name": "Escola",
+				"type": "String"
+			},
+			{
+				"name": "Descr",
+				"type": "String"
+			},
+			{
+				"name": "Distrito",
+				"type": "String"
+			},
+			{
+				"name": "Concelho",
+				"type": "String"
+			},
+			{
+				"name": "PubPriv",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

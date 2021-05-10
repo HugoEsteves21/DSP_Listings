@@ -1,0 +1,42 @@
+{
+	"name": "AzureSqlTable21",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "G01_02_LS_DW_DATA",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "Position",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Track Name",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Artist",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Streams",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Date",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Date Key",
+				"type": "nvarchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "t01g18",
+			"table": "teste"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

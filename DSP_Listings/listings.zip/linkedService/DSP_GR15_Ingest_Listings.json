@@ -1,0 +1,14 @@
+{
+	"name": "DSP_GR15_Ingest_Listings",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"description": "Ligação para ingestão da tabela. ",
+		"annotations": [],
+		"type": "HttpServer",
+		"typeProperties": {
+			"url": "https://github.com/HugoEsteves21/DSP_Listings/blob/47746a3fac0144c04c99c7c3daceae639c62ef7b/Dimensional%20Model%20DSP.xlsx",
+			"enableServerCertificateValidation": false,
+			"authenticationType": "Anonymous"
+		}
+	}
+}

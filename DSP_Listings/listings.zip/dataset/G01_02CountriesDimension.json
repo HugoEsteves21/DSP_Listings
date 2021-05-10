@@ -1,0 +1,38 @@
+{
+	"name": "G01_02CountriesDimension",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LSDataset1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Excel",
+		"typeProperties": {
+			"sheetName": "Sheet1",
+			"location": {
+				"type": "FileServerLocation",
+				"fileName": "CountryDimension.xlsx"
+			},
+			"firstRowAsHeader": true
+		},
+		"schema": [
+			{
+				"name": "Country Key",
+				"type": "String"
+			},
+			{
+				"name": "Country Name",
+				"type": "String"
+			},
+			{
+				"name": "Country Abbreviation",
+				"type": "String"
+			},
+			{
+				"name": "Country Population",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

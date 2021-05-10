@@ -1,0 +1,14 @@
+{
+	"name": "DSP_GR03_Ingest_contratos_COVID_032020_062020_from_GitHubURL",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"description": "Linked Service para extrair documento contratos COVID de 032020 a 062020 do repositório de GitHub",
+		"annotations": [],
+		"type": "HttpServer",
+		"typeProperties": {
+			"url": "https://raw.githubusercontent.com/rmbernardes/Portugal_covid_costs_by_region/main/contratos%20COVID%20032020%20a%20062020.csv",
+			"enableServerCertificateValidation": true,
+			"authenticationType": "Anonymous"
+		}
+	}
+}

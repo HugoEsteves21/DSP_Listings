@@ -1,0 +1,25 @@
+{
+	"name": "Education",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "G1_08_LS_ADLS_DATA",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "Education.csv",
+				"folderPath": "t01/DSP_G1_08/Raw",
+				"fileSystem": "storage"
+			},
+			"columnDelimiter": ";",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": []
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

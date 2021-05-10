@@ -1,0 +1,27 @@
+{
+	"name": "DSP_T02_G11_FolderObjetivosRAW",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "DSP_T02_G11_LS_RAW",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"folderPath": {
+					"value": "t02/DSP_T02_G11/RAW/Objetivos",
+					"type": "Expression"
+				},
+				"container": "storage"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": []
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

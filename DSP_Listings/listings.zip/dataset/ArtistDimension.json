@@ -1,0 +1,50 @@
+{
+	"name": "ArtistDimension",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "G01_02_LS_DW_DATA",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "ArtistKey",
+				"type": "varchar"
+			},
+			{
+				"name": "ArtistName",
+				"type": "varchar"
+			},
+			{
+				"name": "ArtistFollowers",
+				"type": "varchar"
+			},
+			{
+				"name": "ArtistGenres",
+				"type": "varchar"
+			},
+			{
+				"name": "ArtistPopularity",
+				"type": "varchar"
+			},
+			{
+				"name": "StartDate",
+				"type": "varchar"
+			},
+			{
+				"name": "EndDate",
+				"type": "varchar"
+			},
+			{
+				"name": "CurrentRowIndicator",
+				"type": "varchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "t01g18",
+			"table": "Artists"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

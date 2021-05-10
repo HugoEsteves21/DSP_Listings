@@ -1,0 +1,42 @@
+{
+	"name": "DateDimension",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "G01_02_LS_DW_DATA",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "Date Key",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Week start date",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Week end date",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Week number",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Month",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Year",
+				"type": "nvarchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "t01g18",
+			"table": "datedimension"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

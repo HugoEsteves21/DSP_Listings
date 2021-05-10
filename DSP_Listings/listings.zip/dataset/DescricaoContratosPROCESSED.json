@@ -1,0 +1,73 @@
+{
+	"name": "DescricaoContratosPROCESSED",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "T02_DSP_GR03_LS_ADLS2",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"folderPath": "t02/DSP_G2_12/Processed",
+				"fileSystem": "storage"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "data",
+				"type": "String"
+			},
+			{
+				"name": "confirmados",
+				"type": "String"
+			},
+			{
+				"name": "confirmados_arsnorte",
+				"type": "String"
+			},
+			{
+				"name": "confirmados_arscentro",
+				"type": "String"
+			},
+			{
+				"name": "confirmados_arslvt",
+				"type": "String"
+			},
+			{
+				"name": "confirmados_arsalentejo",
+				"type": "String"
+			},
+			{
+				"name": "confirmados_arsalgarve",
+				"type": "String"
+			},
+			{
+				"name": "confirmados_acores",
+				"type": "String"
+			},
+			{
+				"name": "confirmados_madeira",
+				"type": "String"
+			},
+			{
+				"name": "confirmados_estrangeiro",
+				"type": "String"
+			},
+			{
+				"name": "confirmados_novos",
+				"type": "String"
+			},
+			{
+				"name": "lab",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

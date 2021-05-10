@@ -1,0 +1,32 @@
+{
+	"name": "DSP_T02_G11_Tipo_Visita",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "DSP_LS_T2G11_SOURCE",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Excel",
+		"typeProperties": {
+			"sheetName": "tipo_visita",
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "tipo_visita.xlsx",
+				"folderPath": "t02/DSP_T02_G11/SOURCE",
+				"container": "storage"
+			},
+			"firstRowAsHeader": true
+		},
+		"schema": [
+			{
+				"name": "tipo_visita_id ",
+				"type": "String"
+			},
+			{
+				"name": "visita_desc",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

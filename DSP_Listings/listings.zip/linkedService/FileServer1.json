@@ -1,0 +1,18 @@
+{
+	"name": "FileServer1",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"description": "few",
+		"annotations": [],
+		"type": "FileServer",
+		"typeProperties": {
+			"host": "C:\\Users\\873713\\OneDrive - Galp\\Desktop\\TOP200.xlsx",
+			"userId": "873713@galp.com",
+			"encryptedCredential": "eyJDcmVkZW50aWFsSWQiOiIwY2JjYzE2Yy04ODg3LTRkNjQtYjQ3OC00ODUxMWE0ZGQ1M2IiLCJWZXJzaW9uIjoiMi4wIiwiQ2xhc3NUeXBlIjoiTWljcm9zb2Z0LkRhdGFQcm94eS5Db3JlLkludGVyU2VydmljZURhdGFDb250cmFjdC5DcmVkZW50aWFsU1UwNkNZMTQifQ=="
+		},
+		"connectVia": {
+			"referenceName": "Selfhosted",
+			"type": "IntegrationRuntimeReference"
+		}
+	}
+}

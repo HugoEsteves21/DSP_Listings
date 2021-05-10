@@ -1,0 +1,22 @@
+{
+	"name": "RegiaoSaudeGITHUB",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "G2_12_extract_regiao_saude_from_Github",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "HttpServerLocation"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": []
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

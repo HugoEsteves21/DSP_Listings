@@ -1,0 +1,35 @@
+{
+	"name": "DataFlowRhHieararq",
+	"properties": {
+		"folder": {
+			"name": "DSP_T02_G11"
+		},
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "Rh_Hierar_RAW",
+						"type": "DatasetReference"
+					},
+					"name": "RhHierarRAW"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "Rh_Hierar_Silver",
+						"type": "DatasetReference"
+					},
+					"name": "SinktoRhHierarSILVER"
+				}
+			],
+			"transformations": [
+				{
+					"name": "EliminaColunasOrdemFim"
+				}
+			],
+			"script": "source(output(\n\t\tdim_nome as string,\n\t\tdim_id as integer,\n\t\tgrv_name as string,\n\t\tgrv_id as string,\n\t\tsubzona as string,\n\t\tzona as string,\n\t\t{país} as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> RhHierarRAW\nRhHierarRAW select(mapColumn(\n\t\tdim_id,\n\t\tdim_nome,\n\t\tgrv_name\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> EliminaColunasOrdemFim\nEliminaColunasOrdemFim sink(input(\n\t\tColumn_1 as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tpartitionFileNames:['Rh_Hierar_SILVER.csv'],\n\tpartitionBy('hash', 1),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> SinktoRhHierarSILVER"
+		}
+	}
+}

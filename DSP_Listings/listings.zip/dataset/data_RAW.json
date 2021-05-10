@@ -1,0 +1,398 @@
+{
+	"name": "data_RAW",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "T02_DSP_GR03_LS_ADLS2",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "COVIDdata.csv",
+				"folderPath": "t02/DSP_G2_12/Raw",
+				"fileSystem": "storage"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "data",
+				"type": "String"
+			},
+			{
+				"name": "data_dados",
+				"type": "String"
+			},
+			{
+				"name": "confirmados",
+				"type": "String"
+			},
+			{
+				"name": "confirmados_arsnorte",
+				"type": "String"
+			},
+			{
+				"name": "confirmados_arscentro",
+				"type": "String"
+			},
+			{
+				"name": "confirmados_arslvt",
+				"type": "String"
+			},
+			{
+				"name": "confirmados_arsalentejo",
+				"type": "String"
+			},
+			{
+				"name": "confirmados_arsalgarve",
+				"type": "String"
+			},
+			{
+				"name": "confirmados_acores",
+				"type": "String"
+			},
+			{
+				"name": "confirmados_madeira",
+				"type": "String"
+			},
+			{
+				"name": "confirmados_estrangeiro",
+				"type": "String"
+			},
+			{
+				"name": "confirmados_novos",
+				"type": "String"
+			},
+			{
+				"name": "recuperados",
+				"type": "String"
+			},
+			{
+				"name": "obitos",
+				"type": "String"
+			},
+			{
+				"name": "internados",
+				"type": "String"
+			},
+			{
+				"name": "internados_uci",
+				"type": "String"
+			},
+			{
+				"name": "lab",
+				"type": "String"
+			},
+			{
+				"name": "suspeitos",
+				"type": "String"
+			},
+			{
+				"name": "vigilancia",
+				"type": "String"
+			},
+			{
+				"name": "n_confirmados",
+				"type": "String"
+			},
+			{
+				"name": "cadeias_transmissao",
+				"type": "String"
+			},
+			{
+				"name": "transmissao_importada",
+				"type": "String"
+			},
+			{
+				"name": "confirmados_0_9_f",
+				"type": "String"
+			},
+			{
+				"name": "confirmados_0_9_m",
+				"type": "String"
+			},
+			{
+				"name": "confirmados_10_19_f",
+				"type": "String"
+			},
+			{
+				"name": "confirmados_10_19_m",
+				"type": "String"
+			},
+			{
+				"name": "confirmados_20_29_f",
+				"type": "String"
+			},
+			{
+				"name": "confirmados_20_29_m",
+				"type": "String"
+			},
+			{
+				"name": "confirmados_30_39_f",
+				"type": "String"
+			},
+			{
+				"name": "confirmados_30_39_m",
+				"type": "String"
+			},
+			{
+				"name": "confirmados_40_49_f",
+				"type": "String"
+			},
+			{
+				"name": "confirmados_40_49_m",
+				"type": "String"
+			},
+			{
+				"name": "confirmados_50_59_f",
+				"type": "String"
+			},
+			{
+				"name": "confirmados_50_59_m",
+				"type": "String"
+			},
+			{
+				"name": "confirmados_60_69_f",
+				"type": "String"
+			},
+			{
+				"name": "confirmados_60_69_m",
+				"type": "String"
+			},
+			{
+				"name": "confirmados_70_79_f",
+				"type": "String"
+			},
+			{
+				"name": "confirmados_70_79_m",
+				"type": "String"
+			},
+			{
+				"name": "confirmados_80_plus_f",
+				"type": "String"
+			},
+			{
+				"name": "confirmados_80_plus_m",
+				"type": "String"
+			},
+			{
+				"name": "sintomas_tosse",
+				"type": "String"
+			},
+			{
+				"name": "sintomas_febre",
+				"type": "String"
+			},
+			{
+				"name": "sintomas_dificuldade_respiratoria",
+				"type": "String"
+			},
+			{
+				"name": "sintomas_cefaleia",
+				"type": "String"
+			},
+			{
+				"name": "sintomas_dores_musculares",
+				"type": "String"
+			},
+			{
+				"name": "sintomas_fraqueza_generalizada",
+				"type": "String"
+			},
+			{
+				"name": "confirmados_f",
+				"type": "String"
+			},
+			{
+				"name": "confirmados_m",
+				"type": "String"
+			},
+			{
+				"name": "obitos_arsnorte",
+				"type": "String"
+			},
+			{
+				"name": "obitos_arscentro",
+				"type": "String"
+			},
+			{
+				"name": "obitos_arslvt",
+				"type": "String"
+			},
+			{
+				"name": "obitos_arsalentejo",
+				"type": "String"
+			},
+			{
+				"name": "obitos_arsalgarve",
+				"type": "String"
+			},
+			{
+				"name": "obitos_acores",
+				"type": "String"
+			},
+			{
+				"name": "obitos_madeira",
+				"type": "String"
+			},
+			{
+				"name": "obitos_estrangeiro",
+				"type": "String"
+			},
+			{
+				"name": "recuperados_arsnorte",
+				"type": "String"
+			},
+			{
+				"name": "recuperados_arscentro",
+				"type": "String"
+			},
+			{
+				"name": "recuperados_arslvt",
+				"type": "String"
+			},
+			{
+				"name": "recuperados_arsalentejo",
+				"type": "String"
+			},
+			{
+				"name": "recuperados_arsalgarve",
+				"type": "String"
+			},
+			{
+				"name": "recuperados_acores",
+				"type": "String"
+			},
+			{
+				"name": "recuperados_madeira",
+				"type": "String"
+			},
+			{
+				"name": "recuperados_estrangeiro",
+				"type": "String"
+			},
+			{
+				"name": "obitos_0_9_f",
+				"type": "String"
+			},
+			{
+				"name": "obitos_0_9_m",
+				"type": "String"
+			},
+			{
+				"name": "obitos_10_19_f",
+				"type": "String"
+			},
+			{
+				"name": "obitos_10_19_m",
+				"type": "String"
+			},
+			{
+				"name": "obitos_20_29_f",
+				"type": "String"
+			},
+			{
+				"name": "obitos_20_29_m",
+				"type": "String"
+			},
+			{
+				"name": "obitos_30_39_f",
+				"type": "String"
+			},
+			{
+				"name": "obitos_30_39_m",
+				"type": "String"
+			},
+			{
+				"name": "obitos_40_49_f",
+				"type": "String"
+			},
+			{
+				"name": "obitos_40_49_m",
+				"type": "String"
+			},
+			{
+				"name": "obitos_50_59_f",
+				"type": "String"
+			},
+			{
+				"name": "obitos_50_59_m",
+				"type": "String"
+			},
+			{
+				"name": "obitos_60_69_f",
+				"type": "String"
+			},
+			{
+				"name": "obitos_60_69_m",
+				"type": "String"
+			},
+			{
+				"name": "obitos_70_79_f",
+				"type": "String"
+			},
+			{
+				"name": "obitos_70_79_m",
+				"type": "String"
+			},
+			{
+				"name": "obitos_80_plus_f",
+				"type": "String"
+			},
+			{
+				"name": "obitos_80_plus_m",
+				"type": "String"
+			},
+			{
+				"name": "obitos_f",
+				"type": "String"
+			},
+			{
+				"name": "obitos_m",
+				"type": "String"
+			},
+			{
+				"name": "confirmados_desconhecidos_m",
+				"type": "String"
+			},
+			{
+				"name": "confirmados_desconhecidos_f",
+				"type": "String"
+			},
+			{
+				"name": "ativos",
+				"type": "String"
+			},
+			{
+				"name": "internados_enfermaria",
+				"type": "String"
+			},
+			{
+				"name": "confirmados_desconhecidos",
+				"type": "String"
+			},
+			{
+				"name": "incidencia_nacional",
+				"type": "String"
+			},
+			{
+				"name": "incidencia_continente",
+				"type": "String"
+			},
+			{
+				"name": "rt_nacional",
+				"type": "String"
+			},
+			{
+				"name": "rt_continente",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

@@ -1,0 +1,30 @@
+{
+	"name": "Artistas",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LSDataset1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Excel",
+		"typeProperties": {
+			"sheetName": "Sheet1",
+			"location": {
+				"type": "FileServerLocation",
+				"fileName": "Artist.xlsx"
+			},
+			"firstRowAsHeader": true
+		},
+		"schema": [
+			{
+				"name": "ArtistID",
+				"type": "String"
+			},
+			{
+				"name": "ArtistName",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

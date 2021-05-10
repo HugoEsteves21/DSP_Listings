@@ -1,0 +1,27 @@
+{
+	"name": "DSP_G2_13_DS_Kaggle_ChurnPrediction",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "DSP_G2_13_LS_GITHUB_Store",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "HttpServerLocation"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "<!DOCTYPE html>",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

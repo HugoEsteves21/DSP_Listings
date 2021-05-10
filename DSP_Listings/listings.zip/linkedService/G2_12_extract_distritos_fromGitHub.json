@@ -1,0 +1,13 @@
+{
+	"name": "G2_12_extract_distritos_fromGitHub",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "HttpServer",
+		"typeProperties": {
+			"url": "https://raw.githubusercontent.com/rmbernardes/Portugal_covid_costs_by_region/main/distritos_v2.csv",
+			"enableServerCertificateValidation": true,
+			"authenticationType": "Anonymous"
+		}
+	}
+}

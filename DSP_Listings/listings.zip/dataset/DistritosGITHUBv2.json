@@ -1,0 +1,39 @@
+{
+	"name": "DistritosGITHUBv2",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "G2_12_extract_distritos_fromGitHub",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "HttpServerLocation"
+			},
+			"columnDelimiter": ";",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": ""
+		},
+		"schema": [
+			{
+				"name": "Distrito",
+				"type": "String"
+			},
+			{
+				"name": "Região de Saúde",
+				"type": "String"
+			},
+			{
+				"name": "População",
+				"type": "String"
+			},
+			{
+				"name": "População mais65 anos ",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

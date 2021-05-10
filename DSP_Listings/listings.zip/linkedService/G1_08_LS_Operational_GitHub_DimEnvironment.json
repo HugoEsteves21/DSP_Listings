@@ -1,0 +1,13 @@
+{
+	"name": "G1_08_LS_Operational_GitHub_DimEnvironment",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "HttpServer",
+		"typeProperties": {
+			"url": "https://raw.githubusercontent.com/rguerreiro87/dsp/main/Dim_Environment.csv",
+			"enableServerCertificateValidation": true,
+			"authenticationType": "Anonymous"
+		}
+	}
+}

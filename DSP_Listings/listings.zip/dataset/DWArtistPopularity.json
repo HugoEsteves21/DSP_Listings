@@ -1,0 +1,46 @@
+{
+	"name": "DWArtistPopularity",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "G01_02_LS_DW_DATA",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "StreamedDateKey",
+				"type": "varchar"
+			},
+			{
+				"name": "SongKey",
+				"type": "varchar"
+			},
+			{
+				"name": "ArtistKey",
+				"type": "varchar"
+			},
+			{
+				"name": "CountryKey",
+				"type": "varchar"
+			},
+			{
+				"name": "ArtistStreams",
+				"type": "varchar"
+			},
+			{
+				"name": "ArtistMusics",
+				"type": "varchar"
+			},
+			{
+				"name": "Songrankingposition",
+				"type": "varchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "t01g18",
+			"table": "ArtistPopularity"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

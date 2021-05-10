@@ -1,0 +1,39 @@
+{
+	"name": "PL_DF_G16_Raw_to_Processed",
+	"properties": {
+		"description": "Data Ingestion and Transformations from DL Raw storage to DL Processed storage",
+		"activities": [
+			{
+				"name": "DF_G16_ingest_data_from_RAW_to_PROCESSED",
+				"description": "Data Flow to ingest and transform the data",
+				"type": "ExecuteDataFlow",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataflow": {
+						"referenceName": "DF_G16_ingest_data_from_RAW_to_PROCESSED",
+						"type": "DataFlowReference"
+					},
+					"compute": {
+						"coreCount": 8,
+						"computeType": "General"
+					},
+					"traceLevel": "Fine"
+				}
+			}
+		],
+		"folder": {
+			"name": "DSP_T02_G16"
+		},
+		"annotations": [],
+		"lastPublishTime": "2021-05-10T18:00:09Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

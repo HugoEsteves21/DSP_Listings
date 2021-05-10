@@ -1,0 +1,17 @@
+{
+	"name": "LSDataset1",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "FileServer",
+		"typeProperties": {
+			"host": "C:\\Users\\873713\\OneDrive - Galp\\Desktop\\Posgraudação\\DSP\\Datasets",
+			"userId": "873713@galp.com",
+			"encryptedCredential": "eyJDcmVkZW50aWFsSWQiOiI4YzRkYTY4NS1mZmQzLTQ0ZDQtODA0MS1kZjYzYTc5N2ZlM2YiLCJWZXJzaW9uIjoiMi4wIiwiQ2xhc3NUeXBlIjoiTWljcm9zb2Z0LkRhdGFQcm94eS5Db3JlLkludGVyU2VydmljZURhdGFDb250cmFjdC5DcmVkZW50aWFsU1UwNkNZMTQifQ=="
+		},
+		"connectVia": {
+			"referenceName": "Selfhosted",
+			"type": "IntegrationRuntimeReference"
+		}
+	}
+}

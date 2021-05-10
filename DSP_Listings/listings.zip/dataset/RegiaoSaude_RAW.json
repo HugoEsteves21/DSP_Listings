@@ -1,0 +1,30 @@
+{
+	"name": "RegiaoSaude_RAW",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "T02_DSP_GR03_LS_ADLS2",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "RegiaoSaude.csv",
+				"folderPath": "t02/DSP_G2_12/Raw",
+				"fileSystem": "storage"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "Região de Saúde",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

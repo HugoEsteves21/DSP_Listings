@@ -1,0 +1,23 @@
+{
+	"name": "DSP_T02_G11_ObjetivosFolder",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "DSP_LS_T2G11_SOURCE",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Excel",
+		"typeProperties": {
+			"sheetName": "objetivo",
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"folderPath": "t02/DSP_T02_G11/SOURCE/objetivos",
+				"container": "storage"
+			},
+			"range": "A1:M97",
+			"firstRowAsHeader": true
+		},
+		"schema": []
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

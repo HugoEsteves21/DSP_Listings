@@ -1,0 +1,36 @@
+{
+	"name": "Dim_CountyPT_G16",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "DSP_G16_LS_AzureDataLakeStore_to_ADF",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Excel",
+		"typeProperties": {
+			"sheetName": "tblCodsConcelho",
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "tblCodsConcelho.xlsx",
+				"folderPath": "t02/DSP_G16/RAW",
+				"fileSystem": "storage"
+			},
+			"firstRowAsHeader": true
+		},
+		"schema": [
+			{
+				"name": "Distrito",
+				"type": "String"
+			},
+			{
+				"name": "Concelho",
+				"type": "String"
+			},
+			{
+				"name": "Descr",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

@@ -1,0 +1,29 @@
+{
+	"name": "DSP_T02_G11_rh_hierar_SILVER",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "DSP_T02_G11_LS_Silver",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"folderPath": "t02/DSP_T02_G11/SILVER",
+				"fileSystem": "storage"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "Prop_0;Prop_1;Prop_2;Prop_3;Prop_4;Prop_5;Prop_6;Prop_7;Prop_8;Prop_9;Prop_10;Prop_11;Prop_12;Prop_13;Prop_14;Prop_15;Prop_16;Prop_17;FicheiroFonte",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

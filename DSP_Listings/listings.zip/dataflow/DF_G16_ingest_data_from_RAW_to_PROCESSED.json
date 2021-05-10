@@ -1,0 +1,50 @@
+{
+	"name": "DF_G16_ingest_data_from_RAW_to_PROCESSED",
+	"properties": {
+		"description": "This dataflow will import data from Azure Data Lake storage, perform transformations, and re-publish the processed data on another folder on Azure Data Lake storage ",
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "Dim_SchoolsPT_G16",
+						"type": "DatasetReference"
+					},
+					"name": "RAWSchoolsPT"
+				},
+				{
+					"dataset": {
+						"referenceName": "Dim_CountyPT_G16",
+						"type": "DatasetReference"
+					},
+					"name": "RAWCountyPT"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "sinkteste",
+						"type": "DatasetReference"
+					},
+					"name": "sink1"
+				},
+				{
+					"dataset": {
+						"referenceName": "DelimitedText83",
+						"type": "DatasetReference"
+					},
+					"name": "sink2"
+				}
+			],
+			"transformations": [
+				{
+					"name": "RAWCountySortered"
+				},
+				{
+					"name": "RAWSchoolsPTSortered"
+				}
+			],
+			"script": "source(output(\n\t\tSchool_key as integer,\n\t\tName as string,\n\t\tDistrict_key as integer,\n\t\tCounty_key as integer,\n\t\tPubPriv as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\tinferDriftedColumnTypes: true) ~> RAWSchoolsPT\nsource(output(\n\t\tDistrict_key as integer,\n\t\tCounty_key as integer,\n\t\tName as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\tinferDriftedColumnTypes: true) ~> RAWCountyPT\nRAWCountyPT sort(asc(District_key, true),\n\tasc(County_key, true),\n\tasc(Name, true)) ~> RAWCountySortered\nRAWSchoolsPT sort(asc(District_key, true),\n\tasc(County_key, true),\n\tasc(School_key, true),\n\tasc(Name, true)) ~> RAWSchoolsPTSortered\nRAWSchoolsPTSortered sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> sink1\nRAWCountySortered sink(input(\n\t\tColumn_1 as string,\n\t\tColumn_2 as string,\n\t\tColumn_3 as string,\n\t\tColumn_4 as string,\n\t\tColumn_5 as string,\n\t\tColumn_6 as string,\n\t\tColumn_7 as string,\n\t\tColumn_8 as string,\n\t\tColumn_9 as string,\n\t\tColumn_10 as string,\n\t\tColumn_11 as string,\n\t\tColumn_12 as string,\n\t\tColumn_13 as string,\n\t\tColumn_14 as string,\n\t\tColumn_15 as string,\n\t\tColumn_16 as string,\n\t\tColumn_17 as string,\n\t\tColumn_18 as string,\n\t\tColumn_19 as string,\n\t\tColumn_20 as string,\n\t\tColumn_21 as string,\n\t\tColumn_22 as string,\n\t\tColumn_23 as string,\n\t\tColumn_24 as string,\n\t\tColumn_25 as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> sink2"
+		}
+	}
+}

@@ -1,0 +1,23 @@
+{
+	"name": "DSP_G14_LS_ADLS_Depart",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "DSP_G14_LS_ADLS_Store_2",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"folderPath": "t02/DSP_G14/Raw",
+				"fileSystem": "storage"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"quoteChar": "\""
+		},
+		"schema": []
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

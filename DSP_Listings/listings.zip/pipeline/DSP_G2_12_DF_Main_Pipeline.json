@@ -1,0 +1,49 @@
+{
+	"name": "DSP_G2_12_DF_Main_Pipeline",
+	"properties": {
+		"description": "Main pipeline to run all sub pipelines of the project.",
+		"activities": [
+			{
+				"name": "Ingest from GitHub DB to raw ADLS",
+				"description": "Ingesting data from GitHub repository to raw Data Lake storage with copy activities",
+				"type": "ExecutePipeline",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "DSP_G2_12_ingest_data_from_github_to_RAW",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "Ingest data from raw to processed ADLS",
+				"description": "Ingesting all data from raw storage folder to processed storage folder with dataflow activity transformations",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "Ingest from GitHub DB to raw ADLS",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "DSP_G2_12_ingest_data_from_RAW_to_PROCESSED",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			}
+		],
+		"folder": {
+			"name": "DSP_G2_12"
+		},
+		"annotations": [],
+		"lastPublishTime": "2021-05-05T14:52:08Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

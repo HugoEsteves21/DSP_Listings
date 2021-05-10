@@ -1,0 +1,46 @@
+{
+	"name": "DelimitedText82",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LSADLS",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "SongStreaming.csv",
+				"folderPath": "t01/DSP_G01_02/Processed",
+				"fileSystem": "storage"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "53",
+				"type": "String"
+			},
+			{
+				"name": "78436",
+				"type": "String"
+			},
+			{
+				"name": "957635",
+				"type": "String"
+			},
+			{
+				"name": "29659184",
+				"type": "String"
+			},
+			{
+				"name": "1",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

@@ -1,0 +1,30 @@
+{
+	"name": "Concelhos_RAW",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "T02_DSP_GR03_LS_ADLS2",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "concelhos.csv",
+				"folderPath": "t02/DSP_G2_12/Raw",
+				"fileSystem": "storage"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "Objeto do Contrato;Tipo de Procedimento;Tipo(s) de Contrato;CPVs;Entidade(s) Adjudicante(s);Entidade(s) Adjudicatária(s);Preço Contratual;Data de Publicação;Data de Celebração do Contrato;Prazo de Execução;Local de Execução;Fundamentação;Causa de Extinção do Contrato;Data de Fecho do Contrato;Preço Total Efetivo;Causas das Alterações ao Prazo;Causas das Alterações ao Preço;Estado;N.º registo do Acordo Quadro;Descrição do Acordo Quadro;Procedimento Centralizado;Ligação para Peças do Procedimento;Lista de Fornecedores (cocontratantes);Aquisição ao Abrigo de Acordo Quadro de outro Estado-membro da UE",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

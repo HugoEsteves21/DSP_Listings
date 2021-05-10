@@ -1,0 +1,39 @@
+{
+	"name": "G1_08_DS_Operational_GitHub_DimEconomy",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "G1_08_LS_Operational_GitHub_DimEconomy",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "HttpServerLocation"
+			},
+			"columnDelimiter": ";",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "Country/Year;Country Key;Year Key;Gross domestic product at market prices (in M€);Wages and salaries (in M€);Disposable income",
+				"type": "String"
+			},
+			{
+				"name": " net (in M€);Saving",
+				"type": "String"
+			},
+			{
+				"name": " net (in M€);Employment - Less than primary",
+				"type": "String"
+			},
+			{
+				"name": " primary and lower secondary education (levels 0-2);Employment - Upper secondary and post-secondary non-tertiary education (levels 3 and 4);Employment - Tertiary education (levels 5-8);Unnemployment - Percentage of active population;Unnemployment - Percentage of total population;Unnemployment - Thousand persons;PIB",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

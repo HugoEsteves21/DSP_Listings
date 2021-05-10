@@ -1,0 +1,14 @@
+{
+	"name": "DSP_G2_13_LS_Kaggle_ChurnPrediction",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"description": "Linked Service to fetch data from Kaggle Churn Prediction Data",
+		"annotations": [],
+		"type": "HttpServer",
+		"typeProperties": {
+			"url": "https://raw.githubusercontent.com/JairOliveira2014/My_study_data_science/master/DSP_Data/dim_store.csv",
+			"enableServerCertificateValidation": true,
+			"authenticationType": "Anonymous"
+		}
+	}
+}

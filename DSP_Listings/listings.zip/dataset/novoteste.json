@@ -1,0 +1,17 @@
+{
+	"name": "novoteste",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "G01_02_LS_DW_DATA",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "t01g18",
+			"table": "testecountries"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

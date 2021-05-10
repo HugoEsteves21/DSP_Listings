@@ -1,0 +1,97 @@
+{
+	"name": "contratos_PANDEMIA_GitHub",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "DSP_GR03_Ingest_contratos_PANDEMIA_from_GitHubURL",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "DSP_G2_12"
+		},
+		"annotations": [],
+		"type": "Json",
+		"typeProperties": {
+			"location": {
+				"type": "HttpServerLocation"
+			}
+		},
+		"schema": {
+			"type": "object",
+			"properties": {
+				"Objeto do Contrato": {
+					"type": "string"
+				},
+				"Tipo de Procedimento": {
+					"type": "string"
+				},
+				"Tipo(s) de Contrato": {
+					"type": "string"
+				},
+				"CPVs": {
+					"type": "string"
+				},
+				"Entidade(s) Adjudicante(s)": {
+					"type": "string"
+				},
+				"Entidade(s) Adjudicatária(s)": {
+					"type": "string"
+				},
+				"Preço Contratual": {
+					"type": "string"
+				},
+				"Data de Publicação": {
+					"type": "string"
+				},
+				"Data de Celebração do Contrato": {
+					"type": "string"
+				},
+				"Prazo de Execução": {
+					"type": "string"
+				},
+				"Local de Execução": {
+					"type": "string"
+				},
+				"Fundamentação": {
+					"type": "string"
+				},
+				"Causa de Extinção do Contrato": {
+					"type": "string"
+				},
+				"Data de Fecho do Contrato": {
+					"type": "string"
+				},
+				"Preço Total Efetivo": {
+					"type": "string"
+				},
+				"Causas das Alterações ao Prazo": {
+					"type": "string"
+				},
+				"Causas das Alterações ao Preço": {
+					"type": "string"
+				},
+				"Estado": {
+					"type": "string"
+				},
+				"N.º registo do Acordo Quadro": {
+					"type": "string"
+				},
+				"Descrição do Acordo Quadro": {
+					"type": "string"
+				},
+				"Procedimento Centralizado": {
+					"type": "boolean"
+				},
+				"Ligação para Peças do Procedimento": {
+					"type": "string"
+				},
+				"Lista de Fornecedores (cocontratantes)": {
+					"type": "boolean"
+				},
+				"Aquisição ao Abrigo de Acordo Quadro de outro Estado-membro da UE": {
+					"type": "string"
+				}
+			}
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}
